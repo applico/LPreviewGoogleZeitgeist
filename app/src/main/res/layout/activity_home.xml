@@ -144,7 +144,7 @@
             <TextView android:layout_width="fill_parent"
                       android:layout_height="fill_parent"
                       android:layout_below="@+id/card_container"
-                      android:text="Something" />
+                      android:text="Place Holder" />
 
 
          </RelativeLayout>
