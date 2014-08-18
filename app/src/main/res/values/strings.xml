@@ -10,4 +10,10 @@
     <string name="action_example">Example action</string>
     <string name="action_settings">Settings</string>
 
+    <!-- Main Activity -->
+    <string name="yir_title">2014: Year in Review</string>
+    <string name="global_title">Global</string>
+    <string name="region_title">United States</string>
+    <string name="game_title">Play the Game</string>
+
 </resources>
