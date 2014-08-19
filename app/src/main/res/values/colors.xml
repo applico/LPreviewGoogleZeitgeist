@@ -1,0 +1,7 @@
+<resources>
+    <color name="appBarColor">#ff1c75bc</color>
+    <color name="statusBarColor">#ff1d649d</color>
+    <color name="gameBarColor">#ff314e64</color>
+    <color name="appBarTextColor">#ffffffff</color>
+    <color name="layoutStandardBackground">#ffe6e6e6</color>
+</resources>
