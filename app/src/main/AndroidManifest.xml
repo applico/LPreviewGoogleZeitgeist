@@ -19,4 +19,8 @@
         </activity>
     </application>
 
+    <supports-screens android:largeScreens="true"
+                      android:anyDensity="false"
+                      android:requiresSmallestWidthDp="600"/>
+
 </manifest>
