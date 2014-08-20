@@ -160,14 +160,12 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public void onClick(View v) {
-        Log.e(LOG_TAG,"View Clicked");
         switch(v.getId())
         {
             case R.id.global_card_view:
             {
                 Intent intent = new Intent(this, GlobalActivity.class);
                 startActivity(intent);
-                Log.e(LOG_TAG,"Starting the global activity");
                 break;
             }
         }
