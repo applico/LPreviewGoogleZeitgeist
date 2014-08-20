@@ -38,6 +38,7 @@
                 <ImageView android:id="@+id/z_placeholder_image"
                            android:layout_width="fill_parent"
                            android:layout_height="wrap_content"
+                           android:scaleType="fitXY"
                            android:src="@drawable/img_video"
                            />
 
@@ -136,7 +137,7 @@
                         android:layout_centerInParent="true"
                         android:text="@string/region_title"
                         android:textSize="30sp"
-                        android:paddingTop="30dp"
+                        android:paddingTop="25dp"
 
                         />
                 </RelativeLayout>
@@ -154,7 +155,6 @@
                     android:id="@+id/game_icon"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:src="@drawable/icn_game"
                     android:layout_centerInParent="true"
                     android:layout_toLeftOf="@+id/game_title"/>
 
@@ -166,7 +166,8 @@
                     android:textColor="@color/accentTextColor"
                     android:layout_centerInParent="true"
                     android:textSize="32sp"
-                    android:paddingLeft="10dp"/>
+                    android:paddingLeft="10dp"
+                    android:paddingRight="0dp"/>
 
 
             </RelativeLayout>
