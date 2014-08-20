@@ -128,6 +128,7 @@ public class HomeActivity extends Activity
         mClip.setRoundRect(left, top, right, bottom, cv.getRadius() + 20);
         iv.setOutline(mClip);
         iv.setClipToOutline(true);
+        //Test
     }*/
 
     @Override
