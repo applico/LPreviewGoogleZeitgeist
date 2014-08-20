@@ -6,8 +6,11 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.graphics.Outline;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
+import android.util.Log;
 import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -16,11 +19,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 
 public class HomeActivity extends Activity
         implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+
+    private static String LOG_TAG = HomeActivity.class.getSimpleName();
 
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
@@ -41,6 +47,23 @@ public class HomeActivity extends Activity
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
+        Outline mClip = new Outline();
+
+        /**
+         * Get the height and width of the cardview and clip to it using the outline
+         */
+        CardView cv = (CardView) findViewById(R.id.yir_card_view);
+        Log.e(LOG_TAG,"Card View Width: " + cv.getMeasuredWidth());
+        ImageView iv= (ImageView) findViewById(R.id.z_placeholder_image);
+        Log.e(LOG_TAG,"Height: " + iv.getMeasuredHeight());
+        Log.e(LOG_TAG,"Width: " + iv.getMeasuredWidth());
+        int margin = Math.min(iv.getWidth(), iv.getHeight())/10;
+        mClip.setRoundRect(0,0,400,400,100);
+        Log.e(LOG_TAG,"CAn Clip: " + mClip.canClip());
+        iv.setOutline(mClip);
+
+        iv.setClipToOutline(true);
+        Log.e(LOG_TAG,"Clipped");
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
