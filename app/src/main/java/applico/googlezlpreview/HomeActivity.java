@@ -6,6 +6,7 @@ import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.Outline;
 import android.graphics.drawable.BitmapDrawable;
@@ -26,11 +27,11 @@ import android.widget.ImageView;
 import android.widget.TextView;
 
 
-public class HomeActivity extends Activity
-        implements NavigationDrawerFragment.NavigationDrawerCallbacks {
+public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
     private static String LOG_TAG = HomeActivity.class.getSimpleName();
 
+    private CardView mGlobalCardView;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -50,7 +51,8 @@ public class HomeActivity extends Activity
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-
+        mGlobalCardView = (CardView)findViewById(R.id.global_card_view);
+        mGlobalCardView.setOnClickListener(this);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
@@ -154,6 +156,22 @@ public class HomeActivity extends Activity
             return true;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void onClick(View v) {
+        Log.e(LOG_TAG,"View Clicked");
+        switch(v.getId())
+        {
+            case R.id.global_card_view:
+            {
+                Intent intent = new Intent(this, GlobalActivity.class);
+                startActivity(intent);
+                Log.e(LOG_TAG,"Starting the global activity");
+                break;
+            }
+        }
+
     }
 
     /**

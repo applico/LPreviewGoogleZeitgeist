@@ -29,6 +29,8 @@
             android:layout_height="wrap_content"
             android:layout_centerHorizontal="true"
             android:background="@color/cardview_light_background"
+            android:clickable="true"
+            android:foreground="@drawable/ripples"
             card_view:cardCornerRadius="4dp" >
 
             <RelativeLayout
@@ -77,6 +79,8 @@
                 android:paddingRight="60dp"
                 android:paddingTop="25dp"
                 android:paddingBottom="25dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripples"
                 card_view:cardCornerRadius="4dp">
 
                 <RelativeLayout
@@ -118,6 +122,8 @@
                 android:paddingTop="25dp"
                 android:paddingBottom="25dp"
                 android:layout_marginLeft="50dp"
+                android:clickable="true"
+                android:foreground="@drawable/ripples"
                 card_view:cardCornerRadius="4dp">
 
                 <RelativeLayout
@@ -156,7 +162,8 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_centerInParent="true"
-                    android:layout_toLeftOf="@+id/game_title"/>
+                    android:layout_toLeftOf="@+id/game_title"
+                    android:src="@drawable/icn_game"/>
 
                 <TextView
                     android:id="@+id/game_title"
@@ -167,7 +174,8 @@
                     android:layout_centerInParent="true"
                     android:textSize="32sp"
                     android:paddingLeft="10dp"
-                    android:paddingRight="0dp"/>
+                    android:paddingRight="0dp"
+                    />
 
 
             </RelativeLayout>
