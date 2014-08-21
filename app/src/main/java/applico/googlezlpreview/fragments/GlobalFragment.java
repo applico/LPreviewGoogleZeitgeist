@@ -5,17 +5,35 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
 import android.provider.Settings;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
 
 import applico.googlezlpreview.R;
+import applico.googlezlpreview.adapters.EventAdapter;
+import applico.googlezlpreview.models.Event;
 
 
 public class GlobalFragment extends Fragment {
 
     private static String LOG_TAG = GlobalFragment.class.getSimpleName();
     private View mRootView;
+    private View mCardView;
+    private RecyclerView mRecView;
+    private RecyclerView.Adapter mAdapter;
+
+    private List<Event> mEvents;
+
+
 
     /**
      * How much fucking scaffolding do they give you nowadays
@@ -59,10 +77,8 @@ public class GlobalFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
-        }
+        mEvents = initializeDataset();
+        Log.e(LOG_TAG, "OnCreate is done");
     }
 
     @Override
@@ -70,6 +86,15 @@ public class GlobalFragment extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         mRootView = inflater.inflate(R.layout.fragment_globals, container, false);
+        mRecView = (RecyclerView) mRootView.findViewById(R.id.event_recycle_view);
+
+        //Fixed size improve performance, this is a demo application so I am going to set it
+        mRecView.setHasFixedSize(true);
+        mRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
+
+        // specify an adapter (see also next example)
+        mAdapter = new EventAdapter(mEvents);
+        mRecView.setAdapter(mAdapter);
         return mRootView;
     }
 
@@ -101,6 +126,60 @@ public class GlobalFragment extends Fragment {
     public interface OnGlobalFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
+    }
+
+
+
+    /**
+     * This is the initialization of dataset
+     */
+    private List<Event> initializeDataset()
+    {
+        List<Event> annualEvents = new ArrayList<Event>();
+
+        Event ev1 = new Event();
+        ev1.eventShareLink = Uri.parse("lorem ipsum");
+        ev1.eventSummary = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ";
+        ev1.eventTitle = "Gangnam Style";
+        ev1.eventImageSmall = getResources().getDrawable(R.drawable.img_gangnam_small);
+        ev1.eventImageDetail = getResources().getDrawable(R.drawable.img_gangnam);
+
+        Event ev2 = new Event();
+        ev2.eventShareLink = Uri.parse("lorem ipsum");
+        ev2.eventSummary = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
+                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ";
+        ev2.eventTitle = "Hurricane Sandy";
+        ev2.eventImageSmall = getResources().getDrawable(R.drawable.img_sandy);
+        ev2.eventImageDetail = getResources().getDrawable(R.drawable.img_sandy);
+
+
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+        annualEvents.add(ev1);
+        annualEvents.add(ev2);
+
+       return annualEvents;
     }
 
 }

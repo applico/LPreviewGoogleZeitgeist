@@ -17,6 +17,8 @@ import applico.googlezlpreview.fragments.GlobalFragment;
 
 public class GlobalActivity extends Activity implements GlobalFragment.OnGlobalFragmentInteractionListener {
 
+    private static String LOG_TAG = GlobalActivity.class.getSimpleName();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
