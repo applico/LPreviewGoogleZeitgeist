@@ -3,6 +3,7 @@ package applico.googlezlpreview.activities;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -10,6 +11,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
+import android.view.Window;
 
 import applico.googlezlpreview.R;
 
@@ -18,7 +20,12 @@ public class GlobalDetailsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        //Call this before setting the content in your view
+        requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         setContentView(R.layout.fragment_global_detail);
+        messWithBars();
+
+
         /*if (savedInstanceState == null) {
             getFragmentManager().beginTransaction()
                     .add(R.id.container, new PlaceholderFragment())
@@ -61,4 +68,14 @@ public class GlobalDetailsActivity extends Activity {
             return rootView;
         }
     }
+
+    private void messWithBars()
+    {
+        Window w = getWindow();
+        w.setStatusBarColor(Color.BLACK);
+        getActionBar().setTitle("");
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarinvisible));
+    }
+
 }

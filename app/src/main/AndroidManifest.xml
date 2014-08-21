@@ -24,6 +24,14 @@
             android:name=".activities.GlobalDetailsActivity"
             android:label="@string/title_activity_global_details" >
         </activity>
+        <activity
+            android:name=".activities.BaseDrawerActivity"
+            android:label="@string/title_activity_base_drawer" >
+        </activity>
+        <activity
+            android:name=".activities.BaseDrawerFragmentActivity"
+            android:label="@string/title_activity_base_drawer_fragment" >
+        </activity>
     </application>
 
     <supports-screens

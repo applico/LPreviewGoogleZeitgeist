@@ -8,4 +8,5 @@
     <color name="accentTextColor">#ffffffff</color>
     <color name="rippleColor">#ccc7e5f2</color>
     <color name="shareColor">#ffaa07</color>
+    <color name="fabColor">#ffc107</color>
 </resources>

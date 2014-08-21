@@ -4,7 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.app.Fragment;
+import android.support.v4.app.Fragment;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
@@ -22,7 +22,7 @@ import applico.googlezlpreview.adapters.EventAdapter;
 import applico.googlezlpreview.models.Event;
 
 
-public class GlobalFragment extends Fragment{
+public class GlobalFragment extends Fragment {
 
     private static String LOG_TAG = GlobalFragment.class.getSimpleName();
     private View mRootView;

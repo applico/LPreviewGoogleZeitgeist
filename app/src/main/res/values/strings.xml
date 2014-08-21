@@ -23,5 +23,7 @@
     <string name="card_share">Share</string>
     <string name="card_more">Learn More</string>
     <string name="title_activity_global_details">GlobalDetails</string>
+    <string name="title_activity_base_drawer">BaseDrawerActivity</string>
+    <string name="title_activity_base_drawer_fragment">BaseDrawerFragmentActivity</string>
 
 </resources>

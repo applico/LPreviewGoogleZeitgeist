@@ -1,20 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
 
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="wrap_content"
+    android:orientation="vertical" android:layout_width="fill_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/white"
+    android:background="@color/cardview_light_background"
     android:padding="10dp">
 
 
     <!-- A CardView that contains the right hand card -->
     <android.support.v7.widget.CardView
         xmlns:card_view="http://schemas.android.com/apk/res-auto"
-        android:layout_toRightOf="@+id/global_card_view"
         android:id="@+id/region_card_view"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
         android:background="@color/cardview_light_background"
+        android:clickable="true"
+        android:foreground="@drawable/ripples"
         card_view:cardCornerRadius="0dp">
 
         <RelativeLayout
@@ -70,7 +72,6 @@
                     android:text="@string/card_share"
                     android:id="@+id/share_link"
                     android:textSize="20dp"
-                    android:foreground="@drawable/ripples"
                     />
 
                 <TextView
@@ -82,8 +83,7 @@
                     android:id="@+id/learn_more"
                     android:textSize="20dp"
                     android:clickable="true"
-                    android:textColor="@color/shareColor"
-                    android:foreground="@drawable/ripples"/>
+                    android:textColor="@color/shareColor" />
 
             </LinearLayout>
 
