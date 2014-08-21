@@ -15,8 +15,6 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:background="@color/cardview_light_background"
-        android:clickable="true"
-        android:foreground="@drawable/ripples"
         card_view:cardCornerRadius="0dp">
 
         <RelativeLayout
@@ -72,6 +70,7 @@
                     android:text="@string/card_share"
                     android:id="@+id/share_link"
                     android:textSize="20dp"
+                    android:foreground="@drawable/ripples"
                     />
 
                 <TextView
@@ -80,8 +79,11 @@
                     android:layout_marginLeft="40dp"
                     android:layout_marginRight="0dp"
                     android:text="@string/card_more"
+                    android:id="@+id/learn_more"
                     android:textSize="20dp"
-                    android:textColor="@color/shareColor"/>
+                    android:clickable="true"
+                    android:textColor="@color/shareColor"
+                    android:foreground="@drawable/ripples"/>
 
             </LinearLayout>
 

@@ -1,6 +1,9 @@
 package applico.googlezlpreview.adapters;
 
+import android.content.Context;
+import android.content.Intent;
 import android.support.v7.widget.RecyclerView;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -10,6 +13,8 @@ import android.widget.TextView;
 import java.util.List;
 
 import applico.googlezlpreview.R;
+import applico.googlezlpreview.activities.GlobalDetailsActivity;
+import applico.googlezlpreview.activities.HomeActivity;
 import applico.googlezlpreview.models.Event;
 
 /**
@@ -17,8 +22,10 @@ import applico.googlezlpreview.models.Event;
  */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> implements View.OnClickListener {
 
+    private static String LOG_TAG = EventAdapter.class.getSimpleName();
     //ArrayList of the events
     private List<Event> mEventDataset;
+
 
     // Provide a reference to the type of views that you are using
     // (custom viewholder)
@@ -27,15 +34,16 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         private TextView mTitleTV;
         private TextView mTitlePos;
         private TextView mShareTV;
+        private TextView mLearnMoreTV;
 
         private ImageView mBaseImage;
 
         public ViewHolder(View v) {
             super(v);
-
             mTitlePos = (TextView)v.findViewById(R.id.base_caption_num);
             mTitleTV = (TextView)v.findViewById(R.id.base_caption);
             mShareTV = (TextView)v.findViewById(R.id.share_link);
+            mLearnMoreTV = (TextView) v.findViewById(R.id.learn_more);
             mBaseImage = (ImageView)v.findViewById(R.id.base_image);
         }
     }
@@ -65,6 +73,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.mTitlePos.setText(position);
         holder.mTitleTV.setText(ev.eventTitle);
         holder.mBaseImage.setImageDrawable(ev.eventImageSmall);
+        holder.mLearnMoreTV.setOnClickListener(this);
         //TODO - set this properly
         //holder.mShareTV.setTag("uri", ev);
     }
@@ -81,7 +90,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
 
     @Override
-    public void onClick(View view) {
-
+    public void onClick(View v) {
+        switch(v.getId())
+        {
+            case R.id.learn_more:
+                Context ctx = v.getContext();
+                Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
+                ctx.startActivity(intent);
+                break;
+        }
     }
 }

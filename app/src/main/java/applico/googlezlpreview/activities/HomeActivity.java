@@ -1,30 +1,22 @@
-package applico.googlezlpreview;
+package applico.googlezlpreview.activities;
 
 import android.app.Activity;
 
 import android.app.ActionBar;
 import android.app.Fragment;
 import android.app.FragmentManager;
-import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.Outline;
-import android.graphics.drawable.BitmapDrawable;
-import android.graphics.drawable.Drawable;
-import android.os.Build;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
-import android.view.Gravity;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
-import android.widget.ArrayAdapter;
-import android.widget.ImageView;
-import android.widget.TextView;
+
+import applico.googlezlpreview.NavigationDrawerFragment;
+import applico.googlezlpreview.R;
 
 
 public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {

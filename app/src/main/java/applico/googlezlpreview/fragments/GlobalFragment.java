@@ -1,35 +1,34 @@
 package applico.googlezlpreview.fragments;
 
 import android.app.Activity;
+import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.app.Fragment;
-import android.provider.Settings;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
 
 import applico.googlezlpreview.R;
+import applico.googlezlpreview.activities.GlobalDetailsActivity;
 import applico.googlezlpreview.adapters.EventAdapter;
 import applico.googlezlpreview.models.Event;
 
 
-public class GlobalFragment extends Fragment {
+public class GlobalFragment extends Fragment{
 
     private static String LOG_TAG = GlobalFragment.class.getSimpleName();
     private View mRootView;
-    private View mCardView;
     private RecyclerView mRecView;
     private RecyclerView.Adapter mAdapter;
+    private TextView mLearnMoreTV;
 
     private List<Event> mEvents;
 
@@ -78,7 +77,6 @@ public class GlobalFragment extends Fragment {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mEvents = initializeDataset();
-        Log.e(LOG_TAG, "OnCreate is done");
     }
 
     @Override
@@ -121,7 +119,6 @@ public class GlobalFragment extends Fragment {
         super.onDetach();
         mListener = null;
     }
-
 
     public interface OnGlobalFragmentInteractionListener {
         // TODO: Update argument type and name
@@ -181,5 +178,6 @@ public class GlobalFragment extends Fragment {
 
        return annualEvents;
     }
+
 
 }
