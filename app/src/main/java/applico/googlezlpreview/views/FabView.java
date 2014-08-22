@@ -84,16 +84,12 @@ public class FabView extends View {
 
     @Override
     protected void onDraw(Canvas canvas) {
-        mDrawable = getResources().getDrawable(R.drawable.)
-        if(mDrawable != null) {
-            mDrawable.draw(canvas);
-        }
+        canvas.translate(1, 1);
 
-        /**
         mCirclePaint.setColor(mCircleFillColor);
         canvas.drawArc(mCircleArc, mStartAngle, mEndAngle, true, mCirclePaint);
         canvas.drawArc(mCircleArc, mStartAngle, mEndAngle, true, mStrokePaint);
-*/
+
 
     }
 
