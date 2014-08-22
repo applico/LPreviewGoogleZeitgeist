@@ -23,7 +23,7 @@
         fab:cFillColor="@color/fabColor"
         fab:cStrokeColor="@color/fabStrokeColor"
         fab:cStrokeWidth="2"
-        fab:cDrawable="@drawable/icn_game"
+        fab:cDrawable="@drawable/icn_fab_favorite"
         fab:cSize="NORMAL"
         />
 

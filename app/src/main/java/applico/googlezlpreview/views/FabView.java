@@ -31,6 +31,9 @@ public class FabView extends View {
     private int mCircleStrokeWidth;
     private int mFabSize;
     private int mScreenDensity;
+    private int mDrawableHeight;
+    private int mDrawableWidth;
+
     private float mScreenDensityFloat;
     private Drawable mDrawable;
 
@@ -45,6 +48,8 @@ public class FabView extends View {
     private static final int DEFAULT_END_ANGLE = 360;
     private static final int DEFAULT_STROKE_WIDTH = 2;
 
+    //Default FAB sizes according to the material design
+    //docs: http://www.google.com/design/spec/components/buttons.html#buttons-main-buttons
 
     private int DEFAULT_FAB_SIZE = 56;
     private int DEFAULT_FAB_MINI_SIZE = 40;
@@ -86,6 +91,11 @@ public class FabView extends View {
         mCirclePaint.setColor(mCircleFillColor);
         canvas.drawArc(mCircleArc, mStartAngle, mEndAngle, true, mCirclePaint);
         canvas.drawArc(mCircleArc, mStartAngle, mEndAngle, true, mStrokePaint);
+
+        if (mDrawable != null) {
+            mDrawable.setBounds(50,50,100,100);
+            mDrawable.draw(canvas);
+        }
 
 
     }
@@ -177,6 +187,11 @@ public class FabView extends View {
         mCircleStrokeWidth = attrsArray.getInteger(R.styleable.fab_cStrokeWidth, DEFAULT_STROKE_WIDTH);
         mFabSize = attrsArray.getInteger(R.styleable.fab_cSize, DEFAULT_RADIUS_CHECK);
         mDrawable = attrsArray.getDrawable(R.styleable.fab_cDrawable);
+        mDrawableHeight = mDrawable.getIntrinsicHeight();
+        mDrawableWidth = mDrawable.getIntrinsicWidth();
+
+        Log.e(LOG_TAG,"Height: " + mDrawableHeight);
+        Log.e(LOG_TAG,"Width: " + mDrawableWidth);
 
         mStartAngle = DEFAULT_START_ANGLE;
         mEndAngle = DEFAULT_END_ANGLE;
