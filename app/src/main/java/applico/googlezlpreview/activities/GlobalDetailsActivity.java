@@ -12,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.os.Build;
 import android.view.Window;
+import android.view.WindowManager;
 
 import applico.googlezlpreview.R;
 
@@ -69,10 +70,21 @@ public class GlobalDetailsActivity extends Activity {
         }
     }
 
+    /**
+     * This class is intended to get the full bleed images working properly.
+     */
     private void messWithBars()
     {
         Window w = getWindow();
-        w.setStatusBarColor(Color.BLACK);
+        /**
+         * Set Flags and Set Status Bar Color combination allows for full bleed into the status bar
+         * Should be done in a layout so you don't have to write logic for SDK versions
+         * //TODO move to layout
+         */
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+            w.setStatusBarColor(getResources().getColor(android.R.color.transparent));
+        }
         getActionBar().setTitle("");
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarinvisible));

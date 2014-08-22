@@ -71,9 +71,6 @@ public class FabView extends View {
         mStrokePaint.setStyle(Paint.Style.STROKE);
         mStrokePaint.setStrokeWidth(mCircleStrokeWidth);
         mStrokePaint.setColor(mCircleStrokeColor);
-
-        Log.e(LOG_TAG, "Instantiating");
-
     }
 
     //TODO - support the context attribute set and defstyle constructor
@@ -115,7 +112,6 @@ public class FabView extends View {
         }
 
         int circleDiameter = mCircleRadius * 2 - mCircleStrokeWidth;
-        Log.e(LOG_TAG,"Diameter: " + circleDiameter);
         mCircleArc = new RectF(0, 0, circleDiameter, circleDiameter);
         int measuredHeight = measureHeight(heightMeasureSpec);
         setMeasuredDimension(measuredWidth, measuredHeight);
