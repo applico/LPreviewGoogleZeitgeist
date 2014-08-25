@@ -18,13 +18,16 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:layout_alignParentRight="true"
-        android:layout_marginRight="50dp"
-        android:layout_marginBottom="40dp"
+        android:layout_marginRight="16dp"
+        android:layout_marginBottom="20dp"
+        android:elevation="5dp"
         fab:cFillColor="@color/fabColor"
         fab:cStrokeColor="@color/fabStrokeColor"
         fab:cStrokeWidth="2"
-        fab:cDrawable="@drawable/icn_fab_favorite"
         fab:cSize="NORMAL"
+        fab:cRadius="100"
+        fab:cDrawable="@drawable/icn_fab_favorite"
         />
+
 
 </RelativeLayout>

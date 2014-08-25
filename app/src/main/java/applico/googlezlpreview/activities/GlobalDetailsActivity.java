@@ -3,8 +3,12 @@ package applico.googlezlpreview.activities;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.res.Resources;
 import android.graphics.Color;
+import android.net.Uri;
 import android.os.Bundle;
+import android.support.v4.app.FragmentActivity;
+import android.support.v4.view.ViewPager;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -13,25 +17,51 @@ import android.view.ViewGroup;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
+import android.widget.ImageView;
+
+import com.astuetz.PagerSlidingTabStrip;
 
 import applico.googlezlpreview.R;
+import applico.googlezlpreview.adapters.GlobalDetailPagerAdapter;
+import applico.googlezlpreview.adapters.GlobalPagerAdapter;
+import applico.googlezlpreview.fragments.GlobalDetailFragment;
+import applico.googlezlpreview.utils.GenericConstants;
 
-public class GlobalDetailsActivity extends Activity {
+public class GlobalDetailsActivity extends FragmentActivity implements GlobalDetailFragment.OnFragmentInteractionListener {
+
+    private static final String LOG_TAG = GlobalDetailsActivity.class.getSimpleName();
+
+    private static final String mTitle = "";
+    private GlobalDetailPagerAdapter mGlobalDetailFragmentAdapter;
+    private ViewPager mViewPager;
+    private ImageView mBaseImage;
+
+    private static final int TEXT_SIZE = 40;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
         //Call this before setting the content in your view
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
-        setContentView(R.layout.fragment_global_detail);
         messWithBars();
 
+        setContentView(R.layout.activity_global_details);
+        mBaseImage = (ImageView)findViewById(R.id.global_details_image);
 
-        /*if (savedInstanceState == null) {
-            getFragmentManager().beginTransaction()
-                    .add(R.id.container, new PlaceholderFragment())
-                    .commit();
-        }*/
+
+        mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(), GenericConstants.global_details_titles);
+        mViewPager = (ViewPager) findViewById(R.id.pager);
+        mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
+
+        //The tabs need to bind to the pager
+        Resources resource = getResources();
+        PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
+        tabs.setViewPager(mViewPager);
+        tabs.setTextColor(resource.getColor(R.color.appBarTextColor));
+        tabs.setTextSize(TEXT_SIZE);
+        tabs.setDividerColor(resource.getColor(R.color.appBarColor));
+
     }
 
 
@@ -55,22 +85,6 @@ public class GlobalDetailsActivity extends Activity {
     }
 
     /**
-     * A placeholder fragment containing a simple view.
-     */
-    public static class PlaceholderFragment extends Fragment {
-
-        public PlaceholderFragment() {
-        }
-
-        @Override
-        public View onCreateView(LayoutInflater inflater, ViewGroup container,
-                Bundle savedInstanceState) {
-            View rootView = inflater.inflate(R.layout.fragment_glogal_details_deleteme, container, false);
-            return rootView;
-        }
-    }
-
-    /**
      * This class is intended to get the full bleed images working properly.
      */
     private void messWithBars()
@@ -85,9 +99,17 @@ public class GlobalDetailsActivity extends Activity {
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             w.setStatusBarColor(getResources().getColor(android.R.color.transparent));
         }
-        getActionBar().setTitle("");
+        getActionBar().setTitle(mTitle);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarinvisible));
     }
 
+    /**
+     * Dummy implementation.
+     * @param uri
+     */
+    @Override
+    public void onFragmentInteraction(Uri uri) {
+
+    }
 }

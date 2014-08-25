@@ -25,11 +25,12 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private static String LOG_TAG = EventAdapter.class.getSimpleName();
     //ArrayList of the events
     private List<Event> mEventDataset;
+    private static final int POSITION_KEY = 100;
 
 
     // Provide a reference to the type of views that you are using
     // (custom viewholder)
-    public class ViewHolder extends RecyclerView.ViewHolder {
+    public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView mTitleTV;
         private TextView mTitlePos;
@@ -73,9 +74,10 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.mTitlePos.setText(position);
         holder.mTitleTV.setText(ev.eventTitle);
         holder.mBaseImage.setImageDrawable(ev.eventImageSmall);
+        //Set the tag for the onClick event
+        holder.mLearnMoreTV.setTag(POSITION_KEY, holder.getPosition());
         holder.mLearnMoreTV.setOnClickListener(this);
-        //TODO - set this properly
-        //holder.mShareTV.setTag("uri", ev);
+
     }
 
 
@@ -91,6 +93,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onClick(View v) {
+        ViewHolder vh = (ViewHolder)v.getTag(POSITION_KEY);
+
         switch(v.getId())
         {
             case R.id.learn_more:

@@ -8,6 +8,9 @@ public class GenericConstants {
     //TODO - put this in a strings file.
     public static final String[] global_titles = {"searches", "people", "events", "feature films","tv shows", "athletes", "consumer electronics", "performing artists"};
 
+    //TODO - put this in a strings file.
+    public static final String[] global_details_titles = {"summary","stats","tweets"};
+
 
 
 }
