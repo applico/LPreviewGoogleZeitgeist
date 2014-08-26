@@ -9,6 +9,7 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -25,6 +26,7 @@ import applico.googlezlpreview.R;
 import applico.googlezlpreview.adapters.GlobalDetailPagerAdapter;
 import applico.googlezlpreview.adapters.GlobalPagerAdapter;
 import applico.googlezlpreview.fragments.GlobalDetailFragment;
+import applico.googlezlpreview.models.Event;
 import applico.googlezlpreview.utils.GenericConstants;
 
 public class GlobalDetailsActivity extends FragmentActivity implements GlobalDetailFragment.OnFragmentInteractionListener {
@@ -42,6 +44,14 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
+        //Unpack the budle
+        Bundle bundle = getIntent().getExtras();
+        if(bundle != null)
+        {
+            Event mEvent = bundle.getParcelable(Event.class.getSimpleName());
+            Log.e(LOG_TAG, "Event Title: " + mEvent.eventTitle);
+
+        }
         //Call this before setting the content in your view
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         messWithBars();

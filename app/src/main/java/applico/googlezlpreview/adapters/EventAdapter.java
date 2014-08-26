@@ -25,7 +25,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private static String LOG_TAG = EventAdapter.class.getSimpleName();
     //ArrayList of the events
     private List<Event> mEventDataset;
-    private static final int POSITION_KEY = 100;
 
 
     // Provide a reference to the type of views that you are using
@@ -75,7 +74,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         holder.mTitleTV.setText(ev.eventTitle);
         holder.mBaseImage.setImageDrawable(ev.eventImageSmall);
         //Set the tag for the onClick event
-        holder.mLearnMoreTV.setTag(POSITION_KEY, holder.getPosition());
+        holder.mLearnMoreTV.setTag(holder.getPosition());
         holder.mLearnMoreTV.setOnClickListener(this);
 
     }
@@ -93,13 +92,14 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onClick(View v) {
-        ViewHolder vh = (ViewHolder)v.getTag(POSITION_KEY);
-
+        //ViewHolder holder = (ViewHolder)v.getTag();
         switch(v.getId())
         {
             case R.id.learn_more:
+                Event e = mEventDataset.get(Integer.parseInt(v.getTag().toString()));
                 Context ctx = v.getContext();
                 Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
+                intent.putExtra(Event.class.getSimpleName(),e);
                 ctx.startActivity(intent);
                 break;
         }
