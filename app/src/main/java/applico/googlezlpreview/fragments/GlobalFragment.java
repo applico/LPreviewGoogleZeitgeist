@@ -2,6 +2,7 @@ package applico.googlezlpreview.fragments;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.graphics.BitmapFactory;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -144,8 +145,8 @@ public class GlobalFragment extends Fragment {
                 "from About.com praised the song for 'spreading'...";
 
         ev1.eventTitle = "Gangnam Style";
-        ev1.eventImageSmall = getResources().getDrawable(R.drawable.img_gangnam_small);
-        ev1.eventImageDetail = getResources().getDrawable(R.drawable.img_gangnam);
+        ev1.eventImageSmall = BitmapFactory.decodeResource(getResources(),R.drawable.img_gangnam_small);
+        ev1.eventImageDetail = BitmapFactory.decodeResource(getResources(),R.drawable.img_gangnam);
 
         Event ev2 = new Event();
         ev2.eventShareLink = Uri.parse("lorem ipsum");
@@ -155,8 +156,8 @@ public class GlobalFragment extends Fragment {
                 "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
                 "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ";
         ev2.eventTitle = "Hurricane Sandy";
-        ev2.eventImageSmall = getResources().getDrawable(R.drawable.img_sandy);
-        ev2.eventImageDetail = getResources().getDrawable(R.drawable.img_sandy);
+        ev2.eventImageSmall = BitmapFactory.decodeResource(getResources(),R.drawable.img_sandy);
+        ev2.eventImageDetail = BitmapFactory.decodeResource(getResources(),R.drawable.img_sandy);
 
 
         annualEvents.add(ev1);

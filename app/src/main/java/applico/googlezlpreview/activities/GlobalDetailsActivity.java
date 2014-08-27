@@ -19,6 +19,7 @@ import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.astuetz.PagerSlidingTabStrip;
 
@@ -33,33 +34,61 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
     private static final String LOG_TAG = GlobalDetailsActivity.class.getSimpleName();
 
-    private static final String mTitle = "";
     private GlobalDetailPagerAdapter mGlobalDetailFragmentAdapter;
     private ViewPager mViewPager;
-    private ImageView mBaseImage;
+    private ImageView mBaseIV;
+    private TextView mTitleTV;
+    private TextView mTitleRankTV;
+
+    private String mTitle;
+    private String mTitleBlank = "";
+    private String mSummary;
+
+    public static final String TITLE_KEY = "title_key";
+    public static final String RANK_KEY = "rank_key";
+    public static final String SUMMARY_KEY = "summary_key";
+
+    public static final String SHARED_VIEW_TITLE = "header_title";
+    public static final String SHARED_VIEW_RANK = "header_rank";
+    public static final String SHARED_IMAGE = "image";
+
 
     private static final int TEXT_SIZE = 40;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Unpack the budle
-        Bundle bundle = getIntent().getExtras();
-        if(bundle != null)
-        {
-            Event mEvent = bundle.getParcelable(Event.class.getSimpleName());
-            Log.e(LOG_TAG, "Event Title: " + mEvent.eventTitle);
+        //Unpack the bundle
+        /*Bundle bundle = getIntent().getExtras();
+        if(bundle != null) {
+            mTitle = bundle.getString(TITLE_KEY);
+            mSummary = bundle.getString(SUMMARY_KEY);
+            Log.e(LOG_TAG, "Event Title: " + mTitle);
+            Log.e(LOG_TAG,"Event Summary " + mSummary);
 
-        }
+
+        }*/
+
         //Call this before setting the content in your view
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         messWithBars();
-
         setContentView(R.layout.activity_global_details);
-        mBaseImage = (ImageView)findViewById(R.id.global_details_image);
 
+        Bundle bundle = getIntent().getExtras();
 
+        mBaseIV = (ImageView) findViewById(R.id.global_details_image_details);
+        mBaseIV.setViewName(SHARED_IMAGE);
+
+        mTitleTV = (TextView) findViewById(R.id.base_caption_details);
+        mTitleTV.setViewName(SHARED_VIEW_TITLE);
+
+        mTitleRankTV = (TextView) findViewById(R.id.base_caption_num_details);
+        mTitleRankTV.setViewName(SHARED_VIEW_RANK);
+
+        loadItems(bundle);
         mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(), GenericConstants.global_details_titles);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
@@ -109,7 +138,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
             w.setFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION, WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
             w.setStatusBarColor(getResources().getColor(android.R.color.transparent));
         }
-        getActionBar().setTitle(mTitle);
+        getActionBar().setTitle(mTitleBlank);
         getActionBar().setDisplayHomeAsUpEnabled(true);
         getActionBar().setBackgroundDrawable(getResources().getDrawable(R.drawable.actionbarinvisible));
     }
@@ -122,4 +151,11 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     public void onFragmentInteraction(Uri uri) {
 
     }
+
+    private void loadItems(Bundle bundle)
+    {
+        mTitleTV.setText(bundle.getString(TITLE_KEY));
+        mTitleRankTV.setText(bundle.getString(RANK_KEY));
+    }
+
 }

@@ -1,9 +1,13 @@
 package applico.googlezlpreview.adapters;
 
+import android.app.Activity;
+import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
+import android.os.Bundle;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
+import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -32,7 +36,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     public class ViewHolder extends RecyclerView.ViewHolder{
 
         private TextView mTitleTV;
-        private TextView mTitlePos;
+        private TextView mTitleRank;
         private TextView mShareTV;
         private TextView mLearnMoreTV;
 
@@ -40,7 +44,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
         public ViewHolder(View v) {
             super(v);
-            mTitlePos = (TextView)v.findViewById(R.id.base_caption_num);
+            mTitleRank = (TextView)v.findViewById(R.id.base_caption_num);
             mTitleTV = (TextView)v.findViewById(R.id.base_caption);
             mShareTV = (TextView)v.findViewById(R.id.share_link);
             mLearnMoreTV = (TextView) v.findViewById(R.id.learn_more);
@@ -70,11 +74,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         // - replace the contents of the view with that element
         Event ev = mEventDataset.get(pos);
         String position = String.valueOf(pos + 1);
-        holder.mTitlePos.setText(position);
+        holder.mTitleRank.setText(position);
         holder.mTitleTV.setText(ev.eventTitle);
-        holder.mBaseImage.setImageDrawable(ev.eventImageSmall);
+        holder.mBaseImage.setImageBitmap(ev.eventImageSmall);
         //Set the tag for the onClick event
-        holder.mLearnMoreTV.setTag(holder.getPosition());
+        holder.mLearnMoreTV.setTag(holder);
         holder.mLearnMoreTV.setOnClickListener(this);
 
     }
@@ -92,15 +96,38 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
     @Override
     public void onClick(View v) {
-        //ViewHolder holder = (ViewHolder)v.getTag();
         switch(v.getId())
         {
             case R.id.learn_more:
-                Event e = mEventDataset.get(Integer.parseInt(v.getTag().toString()));
+                ViewHolder holder = (ViewHolder)v.getTag();
+                TextView aVTitle = holder.mTitleTV;
+                aVTitle.setViewName(GlobalDetailsActivity.SHARED_VIEW_TITLE);
+
+                TextView aVRank = holder.mTitleRank;
+                aVRank.setViewName(GlobalDetailsActivity.SHARED_VIEW_RANK);
+
+                ImageView aVImage = holder.mBaseImage;
+                aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
+
+                Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
                 Context ctx = v.getContext();
                 Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
-                intent.putExtra(Event.class.getSimpleName(),e);
-                ctx.startActivity(intent);
+                intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
+                intent.putExtra(GlobalDetailsActivity.SUMMARY_KEY, event.eventSummary);
+                intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
+                Activity act = (Activity)ctx;
+
+                Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
+                Pair sharedSecond = Pair.create(aVRank,GlobalDetailsActivity.SHARED_VIEW_RANK);
+                Pair sharedThird = Pair.create(aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE);
+
+
+                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx,sharedFirst,sharedSecond,sharedThird);
+
+                        //new Pair<View, String>
+                        //        (aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE));
+                Bundle bundle = options.toBundle();
+                ctx.startActivity(intent, bundle);
                 break;
         }
     }
