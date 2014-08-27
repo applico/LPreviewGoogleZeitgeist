@@ -1,7 +1,10 @@
 package applico.googlezlpreview.models;
 
+import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
 import android.net.Uri;
+import android.os.Parcel;
+import android.os.Parcelable;
 
 /**
  * Created by Matthew on 8/21/2014.
@@ -19,9 +22,10 @@ public class Event {
     public Uri eventShareLink;
 
     //The card image
-    public Drawable eventImageSmall;
+    public Bitmap eventImageSmall;
 
     //The detail image
-    public Drawable eventImageDetail;
+    public Bitmap eventImageDetail;
+
 
 }
