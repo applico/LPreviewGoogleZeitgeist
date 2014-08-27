@@ -5,12 +5,16 @@ import android.app.ActivityOptions;
 import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
 import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.animation.Animation;
+import android.view.animation.ScaleAnimation;
+import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -109,6 +113,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 ImageView aVImage = holder.mBaseImage;
                 aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
 
+                final CardView mCardView = (CardView)aVImage.getParent();
+
                 Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
                 Context ctx = v.getContext();
                 Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
@@ -121,13 +127,27 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
                 Pair sharedSecond = Pair.create(aVRank,GlobalDetailsActivity.SHARED_VIEW_RANK);
                 Pair sharedThird = Pair.create(aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE);
 
+                Animation a = new Animation() {
 
-                ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx,sharedFirst,sharedSecond,sharedThird);
+                    @Override
+                    protected void applyTransformation(float interpolatedTime, Transformation t) {
+                        ViewGroup.LayoutParams params = mCardView.getLayoutParams();
+
+                        params.leftMargin = (int)(newLeftMargin * interpolatedTime);
+                        yourView.setLayoutParams(params);
+                    }
+                };
+                mCardView.startAnimation(a);
+
+                /*Animation scale = new ScaleAnimation(1, 1.5F, 1, 1.5F, Animation.RELATIVE_TO_SELF, (float)0.5, Animation.RELATIVE_TO_SELF, (float)0.5);
+                scale.setDuration(1000);
+                aVImage.startAnimation(scale);
+                /*ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx,sharedFirst,sharedSecond,sharedThird);
 
                         //new Pair<View, String>
                         //        (aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE));
                 Bundle bundle = options.toBundle();
-                ctx.startActivity(intent, bundle);
+                ctx.startActivity(intent, bundle);*/
                 break;
         }
     }
