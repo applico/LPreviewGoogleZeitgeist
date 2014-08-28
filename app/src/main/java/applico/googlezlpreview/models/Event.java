@@ -27,5 +27,8 @@ public class Event {
     //The detail image
     public Bitmap eventImageDetail;
 
+    //Drawable ID
+    public int eventImageDetailID;
+
 
 }

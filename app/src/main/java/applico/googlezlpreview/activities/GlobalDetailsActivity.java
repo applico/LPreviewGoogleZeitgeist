@@ -47,6 +47,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     public static final String TITLE_KEY = "title_key";
     public static final String RANK_KEY = "rank_key";
     public static final String SUMMARY_KEY = "summary_key";
+    public static final String RESOURCE_KEY = "resource_key";
 
     public static final String SHARED_VIEW_TITLE = "header_title";
     public static final String SHARED_VIEW_RANK = "header_rank";
@@ -92,7 +93,6 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(), GenericConstants.global_details_titles);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
-
         //The tabs need to bind to the pager
         Resources resource = getResources();
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -117,8 +117,13 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
-        if (id == R.id.action_settings) {
-            return true;
+        switch(id)
+        {
+            case R.id.action_settings:
+                return true;
+            case android.R.id.home:
+                finishAfterTransition();
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -152,8 +157,17 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
     }
 
+    @Override
+    public void onBackPressed() {
+        Log.e(LOG_TAG,"On Back Pressed");
+        finishAfterTransition();
+    }
+
+
+
     private void loadItems(Bundle bundle)
     {
+        mBaseIV.setImageDrawable(getResources().getDrawable(bundle.getInt(RESOURCE_KEY)));
         mTitleTV.setText(bundle.getString(TITLE_KEY));
         mTitleRankTV.setText(bundle.getString(RANK_KEY));
     }

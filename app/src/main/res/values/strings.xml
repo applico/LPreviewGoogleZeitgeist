@@ -26,5 +26,6 @@
     <string name="title_activity_base_drawer">BaseDrawerActivity</string>
     <string name="title_activity_base_drawer_fragment">BaseDrawerFragmentActivity</string>
     <string name="title_activity_fab_test_driver">FabTestDriver</string>
+    <string name="title_activity_test_animation">TestAnimationActivity</string>
 
 </resources>

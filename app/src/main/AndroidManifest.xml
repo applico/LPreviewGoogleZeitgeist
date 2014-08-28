@@ -36,6 +36,10 @@
             android:name=".activities.FabTestDriver"
             android:label="@string/title_activity_base_drawer_fragment" >
         </activity>
+        <activity
+            android:name=".activities.TestAnimationActivity"
+            android:label="@string/title_activity_test_animation" >
+        </activity>
     </application>
 
     <supports-screens
