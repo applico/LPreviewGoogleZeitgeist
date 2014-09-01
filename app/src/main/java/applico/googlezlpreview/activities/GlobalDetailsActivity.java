@@ -1,20 +1,24 @@
 package applico.googlezlpreview.activities;
 
+import android.animation.ValueAnimator;
 import android.app.Activity;
 import android.app.ActionBar;
 import android.app.Fragment;
+import android.content.res.ColorStateList;
 import android.content.res.Resources;
+import android.graphics.Bitmap;
 import android.graphics.Color;
+import android.graphics.PorterDuff;
+import android.graphics.drawable.BitmapDrawable;
+import android.graphics.drawable.Drawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.view.ViewPager;
+import android.support.v7.graphics.Palette;
 import android.util.Log;
-import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.view.View;
-import android.view.ViewGroup;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
@@ -25,9 +29,7 @@ import com.astuetz.PagerSlidingTabStrip;
 
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.adapters.GlobalDetailPagerAdapter;
-import applico.googlezlpreview.adapters.GlobalPagerAdapter;
 import applico.googlezlpreview.fragments.GlobalDetailFragment;
-import applico.googlezlpreview.models.Event;
 import applico.googlezlpreview.utils.GenericConstants;
 
 public class GlobalDetailsActivity extends FragmentActivity implements GlobalDetailFragment.OnFragmentInteractionListener {
@@ -55,6 +57,10 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
 
     private static final int TEXT_SIZE = 40;
+    private static final int TINT_START = 150;
+    private static final int TINT_END = -50;
+    private static final int TINT_ANIM_TIME = 2000;
+
 
 
 
@@ -89,7 +95,6 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         mTitleRankTV = (TextView) findViewById(R.id.base_caption_num_details);
         mTitleRankTV.setViewName(SHARED_VIEW_RANK);
 
-        loadItems(bundle);
         mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(), GenericConstants.global_details_titles);
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
@@ -100,6 +105,8 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         tabs.setTextColor(resource.getColor(R.color.appBarTextColor));
         tabs.setTextSize(TEXT_SIZE);
         tabs.setDividerColor(resource.getColor(R.color.appBarColor));
+
+        loadItems(bundle);
 
     }
 
@@ -159,17 +166,64 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
     @Override
     public void onBackPressed() {
-        Log.e(LOG_TAG,"On Back Pressed");
+        //This will reanimate to the previous activity
         finishAfterTransition();
     }
 
 
-
+    /**
+     * This takes care of setting up all the elements, including any animations
+     * @param bundle
+     */
     private void loadItems(Bundle bundle)
     {
         mBaseIV.setImageDrawable(getResources().getDrawable(bundle.getInt(RESOURCE_KEY)));
         mTitleTV.setText(bundle.getString(TITLE_KEY));
         mTitleRankTV.setText(bundle.getString(RANK_KEY));
+
+        //Set the tint
+        final Drawable d = mBaseIV.getDrawable();
+        Bitmap b =  ((BitmapDrawable)d).getBitmap();
+        Palette p = Palette.generate(b);
+
+        //Get the light vibrant color in the image and tint it dark
+        final int color = p.getLightVibrantColor().getRgb();
+
+        ValueAnimator anim = ValueAnimator.ofInt(TINT_START,TINT_END);
+        anim.setDuration(TINT_ANIM_TIME);
+        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+            @Override
+            public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                int percent = (Integer)valueAnimator.getAnimatedValue();
+                int val = getShadedColor(color,percent);
+                d.setTint(ColorStateList.valueOf(val), PorterDuff.Mode.DARKEN);
+            }
+        });
+        anim.start();
+
     }
 
+    /**
+     * RGB value for shaded color
+     * @param color
+     * @param percent
+     * @return
+     */
+    private int getShadedColor(int color, int percent)
+    {
+        int R = Color.red(color);
+        int G = Color.green(color);
+        int B = Color.blue(color);
+
+        R = (R * (100 + percent)) / 100;
+        G = (G * (100 + percent)) / 100;
+        B = (B * (100 + percent)) / 100;
+
+        R = (R<255)?R:255;
+        G = (G<255)?G:255;
+        B = (B<255)?B:255;
+
+        return Color.rgb(R,G,B);
+
+    }
 }

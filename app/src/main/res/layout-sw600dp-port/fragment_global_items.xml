@@ -31,8 +31,7 @@
                 android:layout_width="fill_parent"
                 android:layout_height="300dp"
                 android:scaleType="centerCrop"
-                android:id="@+id/base_image"
-                android:src="@drawable/img_gangnam" />
+                android:id="@+id/base_image" />
 
             <LinearLayout
                 android:layout_width="wrap_content"

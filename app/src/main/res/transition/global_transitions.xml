@@ -3,7 +3,10 @@
 <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
 
     <!-- changeBounds is used for the TextViews which are shared -->
-    <changeBounds>
+    <changeBounds
+        android:duration="10000"
+        android:startDelay="10000"
+        android:interpolator="@android:interpolator/bounce">
         <!--
             Set this transitions target IDs to be those which point to the TextViews in both the
             starting and result Activities
