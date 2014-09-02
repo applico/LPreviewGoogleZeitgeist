@@ -38,6 +38,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     //ArrayList of the events
     private List<Event> mEventDataset;
 
+    private static final int SLIDE_DURATION = 300;
+
  // Provide a suitable constructor (depends on the kind of dataset)
     public EventAdapter(List<Event> myDataset)
     {
@@ -124,10 +126,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private void standardSharedAnimation(ViewHolder holder, Context ctx)
     {
         TextView aVTitle = holder.mTitleTV;
-        aVTitle.setViewName(GlobalDetailsActivity.SHARED_VIEW_TITLE);
-
         TextView aVRank = holder.mTitleRankTV;
-        aVRank.setViewName(GlobalDetailsActivity.SHARED_VIEW_RANK);
 
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
@@ -144,7 +143,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Activity act = (Activity)ctx;
 
         final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
-        final Pair sharedThird = Pair.create(aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, sharedFirst);
         final Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
@@ -153,10 +151,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private void slideandSharedAnimation(ViewHolder holder, final Context ctx)
     {
         TextView aVTitle = holder.mTitleTV;
-        aVTitle.setViewName(GlobalDetailsActivity.SHARED_VIEW_TITLE);
 
         TextView aVRank = holder.mTitleRankTV;
-        aVRank.setViewName(GlobalDetailsActivity.SHARED_VIEW_RANK);
 
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
@@ -174,7 +170,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Activity act = (Activity)ctx;
 
         final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
-        final Pair sharedThird = Pair.create(aVTitle,GlobalDetailsActivity.SHARED_VIEW_TITLE);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, sharedFirst);
 
 
@@ -201,7 +196,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
             }
 
         };
-        anim.setDuration(300);
+        anim.setDuration(SLIDE_DURATION);
 
         anim.setAnimationListener(new Animation.AnimationListener() {
             @Override

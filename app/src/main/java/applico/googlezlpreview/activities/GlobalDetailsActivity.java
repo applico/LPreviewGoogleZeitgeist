@@ -22,6 +22,8 @@ import android.view.MenuItem;
 import android.os.Build;
 import android.view.Window;
 import android.view.WindowManager;
+import android.view.animation.Animation;
+import android.view.animation.AnimationUtils;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -51,8 +53,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     public static final String SUMMARY_KEY = "summary_key";
     public static final String RESOURCE_KEY = "resource_key";
 
-    public static final String SHARED_VIEW_TITLE = "header_title";
-    public static final String SHARED_VIEW_RANK = "header_rank";
+    //Key for the shared elements between activities
     public static final String SHARED_IMAGE = "image";
 
 
@@ -90,14 +91,14 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         mBaseIV.setViewName(SHARED_IMAGE);
 
         mTitleTV = (TextView) findViewById(R.id.base_caption_details);
-        mTitleTV.setViewName(SHARED_VIEW_TITLE);
-
         mTitleRankTV = (TextView) findViewById(R.id.base_caption_num_details);
-        mTitleRankTV.setViewName(SHARED_VIEW_RANK);
 
-        mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(), GenericConstants.global_details_titles);
+        //TODO pull view pager titles from string resource file
+        mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(),
+                GenericConstants.global_details_titles, bundle.getString(SUMMARY_KEY));
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
+
         //The tabs need to bind to the pager
         Resources resource = getResources();
         PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) findViewById(R.id.tabs);
@@ -201,6 +202,11 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         });
         anim.start();
 
+
+        //Fade in animation
+        Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
+        mTitleTV.startAnimation(fadeIn);
+        mTitleRankTV.startAnimation(fadeIn);
     }
 
     /**

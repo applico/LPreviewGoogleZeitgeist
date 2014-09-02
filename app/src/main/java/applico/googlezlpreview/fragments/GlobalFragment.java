@@ -137,12 +137,7 @@ public class GlobalFragment extends Fragment {
 
         Event ev1 = new Event();
         ev1.eventShareLink = Uri.parse("lorem ipsum");
-        ev1.eventSummary = "About" +
-                "'Gangnam Style' is the 18th K-pop single by the South Korean musician Psy.  On December 21, 2012, 'Gangnam Style'"+
-                "became the first YouTube video to reach a billion views" +
-                "Critical Reception" +
-                "The song has received mixed to positive ratings from music critics.  Music journalist Bill Lamb" +
-                "from About.com praised the song for 'spreading'...";
+        ev1.eventSummary = getResources().getString(R.string.gangnam_details_html);
 
         ev1.eventTitle = "Gangnam Style";
         ev1.eventImageSmall = BitmapFactory.decodeResource(getResources(),

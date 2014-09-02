@@ -4,9 +4,12 @@ import android.app.Activity;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
+import android.text.Html;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.TextView;
 
 import applico.googlezlpreview.R;
 
@@ -20,14 +23,17 @@ import applico.googlezlpreview.R;
  *
  */
 public class GlobalDetailFragment extends Fragment {
+
+    private static final String LOG_TAG = GlobalDetailFragment.class.getSimpleName();
+
+    private View mRootView;
+    private TextView mContentView;
+
+    private String mContent = "";
+
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
-    private static final String ARG_PARAM1 = "param1";
-    private static final String ARG_PARAM2 = "param2";
-
-    // TODO: Rename and change types of parameters
-    private String mParam1;
-    private String mParam2;
+    public static final String ARG_CONTENT = "content";
 
     private OnFragmentInteractionListener mListener;
 
@@ -43,8 +49,7 @@ public class GlobalDetailFragment extends Fragment {
     public static GlobalDetailFragment newInstance(String param1, String param2) {
         GlobalDetailFragment fragment = new GlobalDetailFragment();
         Bundle args = new Bundle();
-        args.putString(ARG_PARAM1, param1);
-        args.putString(ARG_PARAM2, param2);
+        args.putString(ARG_CONTENT, param1);
         fragment.setArguments(args);
         return fragment;
     }
@@ -55,17 +60,22 @@ public class GlobalDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        Log.e(LOG_TAG,"In on Create");
         if (getArguments() != null) {
-            mParam1 = getArguments().getString(ARG_PARAM1);
-            mParam2 = getArguments().getString(ARG_PARAM2);
+            Log.e(LOG_TAG, "Arguements is not null");
+            mContent = getArguments().getString(ARG_CONTENT);
         }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_global_detail, container, false);
+        Log.e(LOG_TAG,"On Create View");
+        mRootView = inflater.inflate(R.layout.fragment_global_detail, container, false);
+        mContentView = (TextView)mRootView.findViewById(R.id.content);
+        mContentView.setText(Html.fromHtml(mContent));
+
+        return mRootView;
     }
 
     // TODO: Rename method, update argument and hook method into UI event

@@ -19,20 +19,22 @@ public class GlobalDetailPagerAdapter extends FragmentStatePagerAdapter {
 
     private int mItems;
     private String[] mTitles;
+    private String mContent;
 
-    public GlobalDetailPagerAdapter(android.support.v4.app.FragmentManager fm, String[] titles) {
+    public GlobalDetailPagerAdapter(android.support.v4.app.FragmentManager fm, String[] titles,
+                                    String content) {
         super(fm);
         mItems = titles.length;
         mTitles = titles;
+        mContent = content;
     }
 
     @Override
     public Fragment getItem(int i) {
         Fragment fragment = new GlobalDetailFragment();
-        Bundle args = new Bundle();
-        // Our object is just an integer :-P
-        //args.putInt(DemoObjectFragment.ARG_OBJECT, i + 1);
-        //fragment.setArguments(args);
+        Bundle bundle = new Bundle();
+        bundle.putString(GlobalDetailFragment.ARG_CONTENT, mContent);
+        fragment.setArguments(bundle);
         return fragment;
 
 

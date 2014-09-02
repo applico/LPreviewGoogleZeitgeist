@@ -65,9 +65,7 @@
                 android:orientation="horizontal"
                 android:layout_below="@+id/base_image"
                 android:layout_alignLeft="@+id/base_caption_layout"
-                android:layout_marginTop="20dp"
-                android:layout_marginBottom="20dp"
-                android:layout_marginLeft="5dp"
+                android:padding="10dp"
                 >
 
                 <TextView
