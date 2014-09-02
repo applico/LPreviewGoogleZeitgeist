@@ -6,11 +6,11 @@
     android:layout_height="wrap_content">
 
     <ImageView
-        android:layout_width="wrap_content"
+        android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:scaleType="fitXY"
         android:id="@+id/global_details_image_details"
-        android:src="@drawable/img_gangnam"
-        android:background="@color/android:black"
+
         />
 
     <LinearLayout

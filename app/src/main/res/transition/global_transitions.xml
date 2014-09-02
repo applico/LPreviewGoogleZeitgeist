@@ -2,12 +2,15 @@
 
 <transitionSet xmlns:android="http://schemas.android.com/apk/res/android">
 
-    <!-- changeBounds is used for the TextViews which are shared -->
-    <changeBounds>
-        <!--
+    <!-- changeBounds is used for the TextViews which are shared
+    <changeBounds
+        android:duration="1000"
+        android:startDelay="100"
+        android:interpolator="@android:interpolator/bounce">
+
             Set this transitions target IDs to be those which point to the TextViews in both the
             starting and result Activities
-        -->
+
 
         <targets>
             <target android:targetId="@id/base_caption"/>
@@ -19,7 +22,7 @@
             <target android:targetId="@id/base_caption_num_details" />
         </targets>
 
-    </changeBounds>
+    </changeBounds>-->
 
     <moveImage>
         <targets>

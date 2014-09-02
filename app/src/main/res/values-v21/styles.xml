@@ -8,6 +8,11 @@
 
         <!-- enable window content transitions -->
         <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowExitTransitionOverlap">true</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/global_transitions</item>
+        <item name="android:windowSharedElementExitTransition">@transition/global_transitions</item>
 
 
     </style>

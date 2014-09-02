@@ -26,5 +26,23 @@
     <string name="title_activity_base_drawer">BaseDrawerActivity</string>
     <string name="title_activity_base_drawer_fragment">BaseDrawerFragmentActivity</string>
     <string name="title_activity_fab_test_driver">FabTestDriver</string>
+    <string name="title_activity_test_animation">TestAnimationActivity</string>
+
+    <!-- Details data -->
+    <string name="gangnam_details_html">
+
+        <![CDATA[
+
+            <font color=\'#ff1c75bc\'><big><big>About</big></big></font>
+            <p><big>\'Gangnam Style\' is the 18th K-pop single by the South Korean musician Psy.  On December 21, 2012, \'Gangnam Style\'
+                became the first YouTube video to reach a billion views</big></p>
+                <p style=\"color:#ff1c75bc\"><big><big>Critical Reception</big></big></p></br>
+                <p><big>The song has received mixed to positive ratings from music critics.  Music journalist Bill Lamb
+                from About.com praised the song for \'spreading\' LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM
+                 LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM</big></p>
+
+            ]]>
+
+    </string>
 
 </resources>
