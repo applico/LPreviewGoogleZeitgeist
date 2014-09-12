@@ -9,10 +9,11 @@ import android.util.Log;
 import applico.googlezlpreview.fragments.GlobalFragment;
 
 /**
- * Created by Matthew on 8/21/2014.
+ *
  * This is for managing the swipes between the different global
  * categories
  * TODO - We need to actually handle more than one category, again this is a demo
+ * @author Matt Powers
  */
 public class GlobalPagerAdapter extends FragmentStatePagerAdapter {
 
@@ -31,9 +32,6 @@ public class GlobalPagerAdapter extends FragmentStatePagerAdapter {
     public Fragment getItem(int i) {
         Fragment fragment = new GlobalFragment();
         Bundle args = new Bundle();
-        // Our object is just an integer :-P
-        //args.putInt(DemoObjectFragment.ARG_OBJECT, i + 1);
-        //fragment.setArguments(args);
         return fragment;
 
 

@@ -37,16 +37,6 @@
             android:label="@string/title_activity_base_drawer_fragment"
             android:screenOrientation="portrait">
         </activity>
-        <activity
-            android:name=".activities.FabTestDriver"
-            android:label="@string/title_activity_base_drawer_fragment"
-            android:screenOrientation="portrait">
-        </activity>
-        <activity
-            android:name=".activities.TestAnimationActivity"
-            android:label="@string/title_activity_test_animation"
-            android:screenOrientation="portrait">
-        </activity>
     </application>
 
     <supports-screens

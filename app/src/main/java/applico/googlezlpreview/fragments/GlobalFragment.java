@@ -3,6 +3,7 @@ package applico.googlezlpreview.fragments;
 import android.app.Activity;
 import android.content.Intent;
 import android.graphics.BitmapFactory;
+import android.graphics.drawable.AnimatedStateListDrawable;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
@@ -21,22 +22,22 @@ import applico.googlezlpreview.R;
 import applico.googlezlpreview.activities.GlobalDetailsActivity;
 import applico.googlezlpreview.adapters.EventAdapter;
 import applico.googlezlpreview.models.Event;
+import applico.googlezlpreview.views.FabView;
 
 
-public class GlobalFragment extends Fragment {
+public class GlobalFragment extends Fragment implements View.OnClickListener {
 
     private static String LOG_TAG = GlobalFragment.class.getSimpleName();
     private View mRootView;
     private RecyclerView mRecView;
     private RecyclerView.Adapter mAdapter;
-    private TextView mLearnMoreTV;
-
+    private FabView mFabView;
+    private AnimatedStateListDrawable mDrawable;
     private List<Event> mEvents;
 
 
-
-    /**
-     * How much fucking scaffolding do they give you nowadays
+/**
+     * How much scaffolding do they give you nowadays !?!?!?!
      *
      */
 
@@ -94,6 +95,11 @@ public class GlobalFragment extends Fragment {
         // specify an adapter (see also next example)
         mAdapter = new EventAdapter(mEvents);
         mRecView.setAdapter(mAdapter);
+
+        mFabView = (FabView)mRootView.findViewById(R.id.fab_view);
+        mFabView.setOnClickListener(this);
+        mDrawable = (AnimatedStateListDrawable)mFabView.getCDrawable();
+
         return mRootView;
     }
 
@@ -121,6 +127,24 @@ public class GlobalFragment extends Fragment {
         mListener = null;
     }
 
+    @Override
+    public void onClick(View view) {
+        switch(view.getId()) {
+            case R.id.fab_view :
+                if (mFabView.isSelected()) {
+                    mFabView.setSelected(true);
+                    mDrawable.jumpToCurrentState();
+                    mFabView.setSelected(false);
+                } else {
+                    mFabView.setSelected(false);
+                    mDrawable.jumpToCurrentState();
+                    mFabView.setSelected(true);
+                }
+             break;
+
+        }
+    }
+
     public interface OnGlobalFragmentInteractionListener {
         // TODO: Update argument type and name
         public void onFragmentInteraction(Uri uri);
@@ -129,7 +153,7 @@ public class GlobalFragment extends Fragment {
 
 
     /**
-     * This is the initialization of dataset
+     * This is the initialization of dataset, again demo DEMO!!!
      */
     private List<Event> initializeDataset()
     {
@@ -137,8 +161,6 @@ public class GlobalFragment extends Fragment {
 
         Event ev1 = new Event();
         ev1.eventShareLink = Uri.parse("lorem ipsum");
-        ev1.eventSummary = getResources().getString(R.string.gangnam_details_html);
-
         ev1.eventTitle = "Gangnam Style";
         ev1.eventImageSmall = BitmapFactory.decodeResource(getResources(),
                 R.drawable.img_gangnam);
@@ -147,17 +169,12 @@ public class GlobalFragment extends Fragment {
 
         Event ev2 = new Event();
         ev2.eventShareLink = Uri.parse("lorem ipsum");
-        ev2.eventSummary = "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
-                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
-                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
-                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum " +
-                "lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum lorem ipsum ";
         ev2.eventTitle = "Hurricane Sandy";
         ev2.eventImageSmall = BitmapFactory.decodeResource(getResources(),R.drawable.img_sandy);
         ev2.eventImageDetail = BitmapFactory.decodeResource(getResources(),R.drawable.img_sandy);
         ev2.eventImageDetailID = R.drawable.img_sandy;
 
-
+        //Add a bunch of data
         annualEvents.add(ev1);
         annualEvents.add(ev2);
         annualEvents.add(ev1);

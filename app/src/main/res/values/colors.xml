@@ -11,5 +11,6 @@
     <color name="fabColor">#ffc107</color>
     <color name="fabStrokeColor">#dadada</color>
     <color name="fabSelected">#ffffff</color>
+    <color name="textTitleColor">#ff1c75bc</color>
 
 </resources>

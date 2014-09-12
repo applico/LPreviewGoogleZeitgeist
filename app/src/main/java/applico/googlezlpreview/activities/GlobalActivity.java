@@ -14,8 +14,6 @@ import com.astuetz.PagerSlidingTabStrip;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.adapters.GlobalPagerAdapter;
 import applico.googlezlpreview.fragments.GlobalFragment;
-import applico.googlezlpreview.utils.GenericConstants;
-
 /**
  * The intention of this class is to show the global activities to the user for the past year
  */
@@ -39,7 +37,7 @@ public class GlobalActivity extends BaseDrawerFragmentActivity implements Global
          * more of the support packages.
         */
 
-        mGlobalFragmentAdapter = new GlobalPagerAdapter(getSupportFragmentManager(), GenericConstants.global_titles);
+        mGlobalFragmentAdapter = new GlobalPagerAdapter(getSupportFragmentManager(),getResources().getStringArray(R.array.global_titles));
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalFragmentAdapter);
 

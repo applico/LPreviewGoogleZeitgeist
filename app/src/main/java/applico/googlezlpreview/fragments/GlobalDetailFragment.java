@@ -20,16 +20,13 @@ import applico.googlezlpreview.R;
  * to handle interaction events.
  * Use the {@link GlobalDetailFragment#newInstance} factory method to
  * create an instance of this fragment.
- *
+ * @author Matt Powers
  */
 public class GlobalDetailFragment extends Fragment {
 
     private static final String LOG_TAG = GlobalDetailFragment.class.getSimpleName();
 
     private View mRootView;
-    private TextView mContentView;
-
-    private String mContent = "";
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,21 +57,12 @@ public class GlobalDetailFragment extends Fragment {
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        Log.e(LOG_TAG,"In on Create");
-        if (getArguments() != null) {
-            Log.e(LOG_TAG, "Arguements is not null");
-            mContent = getArguments().getString(ARG_CONTENT);
-        }
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        Log.e(LOG_TAG,"On Create View");
         mRootView = inflater.inflate(R.layout.fragment_global_detail, container, false);
-        mContentView = (TextView)mRootView.findViewById(R.id.content);
-        mContentView.setText(Html.fromHtml(mContent));
-
         return mRootView;
     }
 

@@ -1,18 +1,18 @@
 package applico.googlezlpreview.activities;
 
-import android.app.Activity;
 import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
-import android.view.Menu;
-import android.view.MenuItem;
 
 import applico.googlezlpreview.NavigationDrawerFragment;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.fragments.DrawerFragment;
 
+/**
+ * Base Fragment Activity using the Nav Drawer
+ */
 public class BaseDrawerFragmentActivity extends FragmentActivity implements NavigationDrawerFragment.NavigationDrawerCallbacks, DrawerFragment.OnDrawerFragmentInteractionListener {
 
     private NavigationDrawerFragment mNavigationDrawerFragment;
@@ -40,20 +40,6 @@ public class BaseDrawerFragmentActivity extends FragmentActivity implements Navi
         fragmentManager.beginTransaction()
                 .replace(R.id.container, DrawerFragment.newInstance(position + 1))
                 .commit();
-    }
-
-    public void onSectionAttached(int number) {
-        /*switch (number) {
-            case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
-                break;
-        }*/
     }
 
     @Override

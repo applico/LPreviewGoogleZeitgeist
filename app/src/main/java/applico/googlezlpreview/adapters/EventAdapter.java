@@ -16,6 +16,7 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -23,24 +24,25 @@ import java.util.List;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.activities.GlobalDetailsActivity;
 import applico.googlezlpreview.models.Event;
+import applico.googlezlpreview.views.FabView;
 
 /**
- * Created by Matthew on 8/21/2014.
  * There are two methods that I have incorporated as a logical
  * branch to show off different animations. One is using the standard moveImage tag
  * The other is to show off combining the animation classes with the make scene transition
- * animation class
+ * animation class.  The animations are not clean right now, it would take a little refactoring, but the
+ * intention of these was to show off the new shared element animation and the combination of a shared
+ * element
+ * @author Matt Powers
  */
 public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> implements View
         .OnClickListener {
 
     private static String LOG_TAG = EventAdapter.class.getSimpleName();
-    //ArrayList of the events
     private List<Event> mEventDataset;
-
     private static final int SLIDE_DURATION = 300;
 
- // Provide a suitable constructor (depends on the kind of dataset)
+    // Provide a suitable constructor (depends on the kind of dataset)
     public EventAdapter(List<Event> myDataset)
     {
         mEventDataset = myDataset;
@@ -123,54 +125,57 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
 
+    //TODO this logic needs to be moved out of the adapter and into the fragment.
     private void standardSharedAnimation(ViewHolder holder, Context ctx)
     {
         TextView aVTitle = holder.mTitleTV;
         TextView aVRank = holder.mTitleRankTV;
-
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
+       final CardView cv = (CardView)aVImage.getParent().getParent();
 
-        final CardView cv = (CardView)aVImage.getParent().getParent();
 
         Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
 
         final Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
-        intent.putExtra(GlobalDetailsActivity.SUMMARY_KEY, event.eventSummary);
         intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
         Activity act = (Activity)ctx;
 
-        final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, sharedFirst);
-        final Bundle bundle = options.toBundle();
+        Pair shared = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
+        Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
     }
 
+    //TODO this logic needs to be moved out of the adapter and into the fragment.
     private void slideandSharedAnimation(ViewHolder holder, final Context ctx)
     {
         TextView aVTitle = holder.mTitleTV;
-
         TextView aVRank = holder.mTitleRankTV;
-
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
 
 
         final CardView cv = (CardView)aVImage.getParent().getParent();
+        RelativeLayout rl = (RelativeLayout)cv.getParent().getParent().getParent();
+        FabView fv = (FabView)rl.findViewById(R.id.fab_view);
+        fv.setViewName(GlobalDetailsActivity.SHARED_FAB_VIEW);
+
 
         Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
 
         final Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
-        intent.putExtra(GlobalDetailsActivity.SUMMARY_KEY, event.eventSummary);
         intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
         Activity act = (Activity)ctx;
 
         final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, sharedFirst);
+        final Pair sharedSecond = Pair.create(fv, GlobalDetailsActivity.SHARED_FAB_VIEW);
+
+        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx,sharedFirst,sharedSecond);
 
 
         final Bundle bundle = options.toBundle();
@@ -182,7 +187,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                Log.e(LOG_TAG, "Interpolated Time: " + interpolatedTime);
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
                 int currentLeftMargin = params.leftMargin;
                 int currentRightMargin = params.rightMargin;
@@ -206,16 +210,8 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                Log.e(LOG_TAG, "Animation End");
                 LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
-
-
                 ctx.startActivity(intent, bundle);
-                        /*
-                        cv.clearAnimation();
-                        params.leftMargin = originalLeftMargin;
-                        params.rightMargin = originalRightMargin;
-                        cv.setLayoutParams(params);*/
             }
 
             @Override

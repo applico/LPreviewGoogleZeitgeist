@@ -19,7 +19,12 @@ import android.support.v4.widget.DrawerLayout;
 import applico.googlezlpreview.NavigationDrawerFragment;
 import applico.googlezlpreview.R;
 
-
+/**
+ *
+ * This is the main place holder class for Zeitgeist, there is a lot of scaffolding in here that you can
+ * ignore.  The only real "L" stuff that is going on in here is the ripple drawable associate with the new cardview.
+ * @author Matt Powers
+ */
 public class HomeActivity extends Activity implements NavigationDrawerFragment.NavigationDrawerCallbacks, View.OnClickListener {
 
     private static String LOG_TAG = HomeActivity.class.getSimpleName();
@@ -54,7 +59,6 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
 
     @Override
     public void onNavigationDrawerItemSelected(int position) {
-        Log.e(LOG_TAG, "Drawer Selection");
         // update the main content by replacing fragments
         FragmentManager fragmentManager = getFragmentManager();
         fragmentManager.beginTransaction()
@@ -65,13 +69,7 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
     public void onSectionAttached(int number) {
         switch (number) {
             case 1:
-                mTitle = getString(R.string.title_section1);
-                break;
-            case 2:
-                mTitle = getString(R.string.title_section2);
-                break;
-            case 3:
-                mTitle = getString(R.string.title_section3);
+                mTitle = getResources().getString(R.string.app_name);
                 break;
         }
     }
@@ -82,50 +80,6 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
-
-   /* @Override
-    public void onWindowFocusChanged(boolean hasFocus) {
-        super.onWindowFocusChanged(hasFocus);
-        Outline mClip = new Outline();
-
-        /**
-         * Get the height and width of the cardview and clip to it using the outline
-
-        CardView cv = (CardView) findViewById(R.id.yir_card_view);
-        ImageView iv= (ImageView) findViewById(R.id.z_placeholder_image);
-        */
-        /**
-         * This is a replacement for FitXY to show off the clipping functionality of
-         * Android.  Its actually backwards, we would want our lives to be simpler but I wanted to
-         * use the new outline class.onWindowFocusChagned gets called a bunch in the activity
-         * lifecycle, so this may not be the best example of setting the imageviews outline but
-         * hey what the hell
-         * 1) Get the imageview's bitmap
-         * 2) Scale the bitmap to match the width of the imageview
-         * 3) Compute the height and width of the imageview
-         * 4) Get the radius of the cardview corners
-         * 5) Clip that bitch.
-         */
-
-        /*Drawable bmpDraw = iv.getDrawable();
-        Bitmap originalBmp = ((BitmapDrawable)bmpDraw).getBitmap();
-
-        Bitmap bmp = Bitmap.createScaledBitmap(originalBmp,iv.getMeasuredWidth(),
-                iv.getMeasuredHeight(),true);
-
-        iv.setImageBitmap(bmp);
-        int margin = Math.min(iv.getWidth(), iv.getHeight())/10;
-
-        //No Margin
-        int left = 0;
-        int top = 0;
-        int right = cv.getMeasuredWidth();
-        int bottom = iv.getMeasuredHeight() + 10;
-        mClip.setRoundRect(left, top, right, bottom, cv.getRadius() + 20);
-        iv.setOutline(mClip);
-        iv.setClipToOutline(true);
-        //Test
-    }*/
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {

@@ -1,9 +1,8 @@
 package applico.googlezlpreview.activities;
 
+import android.animation.Animator;
+import android.animation.AnimatorListenerAdapter;
 import android.animation.ValueAnimator;
-import android.app.Activity;
-import android.app.ActionBar;
-import android.app.Fragment;
 import android.content.res.ColorStateList;
 import android.content.res.Resources;
 import android.graphics.Bitmap;
@@ -20,6 +19,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.os.Build;
+import android.view.View;
+import android.view.ViewAnimationUtils;
 import android.view.Window;
 import android.view.WindowManager;
 import android.view.animation.Animation;
@@ -32,8 +33,15 @@ import com.astuetz.PagerSlidingTabStrip;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.adapters.GlobalDetailPagerAdapter;
 import applico.googlezlpreview.fragments.GlobalDetailFragment;
-import applico.googlezlpreview.utils.GenericConstants;
+import applico.googlezlpreview.views.FabView;
 
+/**
+ * The intention of this activity is to show off, shared elements as well as a circular reveal.
+ * What interesting is that the way L is constitued now, transforming is not supported so I created my own transform and didn't
+ * move the element to simulate the a shared like transition.  We also are showing off a tintable animation in this class that
+ * tints the image from a sample of the lightest vibrant color from the Palette class.
+ * @author Matt Powers
+ */
 public class GlobalDetailsActivity extends FragmentActivity implements GlobalDetailFragment.OnFragmentInteractionListener {
 
     private static final String LOG_TAG = GlobalDetailsActivity.class.getSimpleName();
@@ -43,6 +51,8 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     private ImageView mBaseIV;
     private TextView mTitleTV;
     private TextView mTitleRankTV;
+
+    private FabView mFabView;
 
     private String mTitle;
     private String mTitleBlank = "";
@@ -55,6 +65,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
     //Key for the shared elements between activities
     public static final String SHARED_IMAGE = "image";
+    public static final String SHARED_FAB_VIEW = "fab_view";
 
 
     private static final int TEXT_SIZE = 40;
@@ -69,33 +80,26 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
 
-        //Unpack the bundle
-        /*Bundle bundle = getIntent().getExtras();
-        if(bundle != null) {
-            mTitle = bundle.getString(TITLE_KEY);
-            mSummary = bundle.getString(SUMMARY_KEY);
-            Log.e(LOG_TAG, "Event Title: " + mTitle);
-            Log.e(LOG_TAG,"Event Summary " + mSummary);
-
-
-        }*/
-
         //Call this before setting the content in your view
         requestWindowFeature(Window.FEATURE_ACTION_BAR_OVERLAY);
         messWithBars();
         setContentView(R.layout.activity_global_details);
 
+        //Get the bundle to process the shared elements on
         Bundle bundle = getIntent().getExtras();
 
+        //Setup the shared resources
         mBaseIV = (ImageView) findViewById(R.id.global_details_image_details);
         mBaseIV.setViewName(SHARED_IMAGE);
+        mFabView = (FabView) findViewById(R.id.fab_view_details);
+        mFabView.setViewName(SHARED_FAB_VIEW);
 
         mTitleTV = (TextView) findViewById(R.id.base_caption_details);
         mTitleRankTV = (TextView) findViewById(R.id.base_caption_num_details);
 
         //TODO pull view pager titles from string resource file
         mGlobalDetailFragmentAdapter = new GlobalDetailPagerAdapter(getSupportFragmentManager(),
-                GenericConstants.global_details_titles, bundle.getString(SUMMARY_KEY));
+                getResources().getStringArray(R.array.global_details_titles));
         mViewPager = (ViewPager) findViewById(R.id.pager);
         mViewPager.setAdapter(mGlobalDetailFragmentAdapter);
 
@@ -203,10 +207,20 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         anim.start();
 
 
-        //Fade in animation
+        //Fade in animation for the text
         Animation fadeIn = AnimationUtils.loadAnimation(this,R.anim.fade_in);
         mTitleTV.startAnimation(fadeIn);
         mTitleRankTV.startAnimation(fadeIn);
+
+        //TODO - I should be able to use the changeTransform style, but it doesn't appear to be working
+        Animation scaleFab = AnimationUtils.loadAnimation(this,R.anim.scale_down);
+        mFabView.startAnimation(scaleFab);
+
+        /**
+         * Alternatively I could use the circular reveal effect and not scale using the animation class, this code is overkill
+         * I would probably just use the Animation class and a scale animation from my animation resources if given the choice
+         */
+
     }
 
     /**

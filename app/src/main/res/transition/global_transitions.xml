@@ -24,6 +24,16 @@
 
     </changeBounds>-->
 
+    <changeBounds
+        android:duration="1000">
+        <targets>
+            <target android:targetId="@+id/fab_view"/>
+            <target android:targetId="@+id/fab_view_details"/>
+        </targets>
+    </changeBounds>
+
+
+
     <moveImage>
         <targets>
             <target android:targetId="@id/base_image"/>
