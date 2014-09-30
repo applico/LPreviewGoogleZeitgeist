@@ -15,14 +15,14 @@ accompanying Android documentation found here:
 https://developer.android.com/preview/material/index.html
 
 Including:
-*Implementation of a custom FabView that Applico could customize and reuse on all of its projects
-*Shared element transitions between activites
-*The RecyclerView
-*The CardView
-*Theming and use of the new primary and secondary colors
-*Touch feedback, in particular the new ripple drawables
-*Animated State List Drawables for the FabView
-*Drawable Tinting and the Palette Class
+* Implementation of a custom FabView that Applico could customize and reuse on all of its projects
+* Shared element transitions between activites
+* The RecyclerView
+* The CardView
+* Theming and use of the new primary and secondary colors
+* Touch feedback, in particular the new ripple drawables
+* Animated State List Drawables for the FabView
+* Drawable Tinting and the Palette Class
 
 
 Some of the more advanced topics like curved motion and the reveal and path based implementations didn't make it into this demo.  But we encourage people to contribute and help us out!
