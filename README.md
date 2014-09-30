@@ -1,4 +1,4 @@
-LPreviewGoogleZeitgeist
+Zeitgeist 2014 - The "Material" way
 =======================
 
 Applico's design and development team was looking at an opportunity to implement some of the philosophical changes that have come with the soon to be released Android "L" version of the Android OS and in turn
