@@ -1,0 +1,74 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <string name="app_name">Zeitgeist 2014</string>
+    <string name="title_section1">Zeitgeist 2014</string>
+    <string name="title_section2">Section 2</string>
+    <string name="title_section3">Section 3</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="action_example">Example action</string>
+    <string name="action_settings">Settings</string>
+
+    <!-- Main Activity -->
+    <string name="yir_title">2014: Year in Review</string>
+    <string name="global_title">Global</string>
+    <string name="region_title">United States</string>
+    <string name="game_title">Play the Game</string>
+    <string name="title_activity_global_activity">global_activity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+    <!-- Card Strings -->
+    <string name="card_share">Share</string>
+    <string name="card_more">Learn More</string>
+    <string name="title_activity_global_details">GlobalDetails</string>
+    <string name="title_activity_base_drawer">BaseDrawerActivity</string>
+    <string name="title_activity_base_drawer_fragment">BaseDrawerFragmentActivity</string>
+    <string name="title_activity_fab_test_driver">FabTestDriver</string>
+    <string name="title_activity_test_animation">TestAnimationActivity</string>
+
+    <!-- Details data -->
+    <string name="gangnam_details_html">
+
+        <![CDATA[
+
+            <font color=\'#ff1c75bc\'><big><big>About</big></big></font>
+            <p><big>\'Gangnam Style\' is the 18th K-pop single by the South Korean musician Psy.  On December 21, 2012, \'Gangnam Style\'
+                became the first YouTube video to reach a billion views</big></p>
+                <p style=\"color:#ff1c75bc\"><big><big>Critical Reception</big></big></p></br>
+                <p><big>The song has received mixed to positive ratings from music critics.  Music journalist Bill Lamb
+                from About.com praised the song for \'spreading\' LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM
+                 LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM LOREM IPSUM</big></p>
+
+            ]]>
+
+    </string>
+
+    <string name="gangnam_about_title">About</string>
+    <string name="gangnam_about_content">"Gangnam Style" is the 18th K-pop single by the South Korean musician Psy.  On December 21, 2012 "Gangnam Style" became the first YouTube video to reach a billion views.
+    </string>
+    <string name="gangnam_critical_title">Critical Reception</string>
+    <string name="gangnam_critical_content">The song has received mixed to positive ratings from music critics.  Music journalist Bill Lamb from About.com praised the song for "spreading smiles and pure fun around the world in record time."
+    </string>
+    <string name="gangnam_other_title">K-pop and the Korean</string>
+    <string name="gangnam_other_content">According to the news Agency Agence France-Presse, the success of "Gangnam Style" </string>
+
+
+    <string-array name="global_titles">
+        <item>searches</item>
+        <item>people</item>
+        <item>events</item>
+        <item>feature films</item>
+        <item>tv shows</item>
+        <item>athletes</item>
+        <item>consumer electronics</item>
+        <item>performing artists</item>
+    </string-array>
+    <string-array name="global_details_titles">
+        <item>summary</item>
+        <item>stats</item>
+        <item>tweets</item>
+    </string-array>
+
+</resources>

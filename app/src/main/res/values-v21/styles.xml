@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <style name="AppTheme" parent="android:Theme.Material.Light.DarkActionBar">
+        <item name="android:colorPrimary">@color/appBarColor</item>
+        <item name="android:colorPrimaryDark">@color/statusBarColor</item>
+        <item name="android:windowBackground">@color/layoutStandardBackground</item>
+
+        <!-- enable window content transitions -->
+        <item name="android:windowContentTransitions">true</item>
+        <item name="android:windowAllowEnterTransitionOverlap">true</item>
+        <item name="android:windowAllowExitTransitionOverlap">true</item>
+
+        <item name="android:windowSharedElementEnterTransition">@transition/global_transitions</item>
+        <item name="android:windowSharedElementExitTransition">@transition/global_transitions</item>
+    </style>
+
+</resources>
