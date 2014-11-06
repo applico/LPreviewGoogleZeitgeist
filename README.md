@@ -6,6 +6,8 @@ the new Google framework around "Material Design".
 This repo is an attempt to implement and refresh the current Google Zeigeist 2012 application that currently lives on the Google Play store:
 https://play.google.com/store/apps/details?id=com.google.android.apps.zeitgeist&hl=en
 
+The app is targeted to SDK 20, Google’s pre-release of Lollipop. It is not built with backward compatibility.
+
 ###Goals
 ==============================
 Under the artifacts folder there is a ppt presentation on our goals for the project and what we accomplished.

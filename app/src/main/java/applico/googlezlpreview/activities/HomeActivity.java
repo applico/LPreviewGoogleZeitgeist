@@ -29,7 +29,7 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
 
     private static String LOG_TAG = HomeActivity.class.getSimpleName();
 
-    private CardView mGlobalCardView;
+    //private CardView mGlobalCardView;
     /**
      * Fragment managing the behaviors, interactions and presentation of the navigation drawer.
      */
@@ -49,7 +49,7 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
                 getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
-        mGlobalCardView = (CardView)findViewById(R.id.global_card_view);
+        final CardView mGlobalCardView = (CardView)findViewById(R.id.global_card_view);
         mGlobalCardView.setOnClickListener(this);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(

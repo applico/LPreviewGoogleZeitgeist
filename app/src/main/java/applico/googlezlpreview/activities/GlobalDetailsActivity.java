@@ -192,7 +192,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         Palette p = Palette.generate(b);
 
         //Get the light vibrant color in the image and tint it dark
-        final int color = p.getLightVibrantColor().getRgb();
+        final int color = p.getLightVibrantColor(getResources().getColor(R.color.appBarColor));
 
         ValueAnimator anim = ValueAnimator.ofInt(TINT_START,TINT_END);
         anim.setDuration(TINT_ANIM_TIME);
@@ -200,7 +200,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
             @Override
             public void onAnimationUpdate(ValueAnimator valueAnimator) {
                 int percent = (Integer)valueAnimator.getAnimatedValue();
-                int val = getShadedColor(color,percent);
+                int val = getShadedColor(color, percent);
                 d.setTint(ColorStateList.valueOf(val), PorterDuff.Mode.DARKEN);
             }
         });
