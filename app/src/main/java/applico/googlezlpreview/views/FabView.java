@@ -104,7 +104,7 @@ public class FabView extends ImageView {
                     mDrawableHeight + mOffsetTop);
             mDrawable.draw(canvas);
         }
-        //TODO this.setOutline(mOutline);
+        setOutlineProvider(mOutline);
         setClipToOutline(true);
     }
 
@@ -220,7 +220,7 @@ public class FabView extends ImageView {
         mOffsetLeft = mCircleRadius - (mDrawableWidth/2);
         mOffsetTop = mCircleRadius - (mDrawableWidth/2);
 
-        mOutline =  new ViewOutlineProvider() {
+        mOutline = new ViewOutlineProvider() {
             @Override
             public void getOutline(View view, Outline outline) {
                 // Or read size directly from the view's width/height
@@ -391,11 +391,5 @@ public class FabView extends ImageView {
         super.setImageDrawable(drawable);
 
     }
-
-
-
-
-
-
 
 }
