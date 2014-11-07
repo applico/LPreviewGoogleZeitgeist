@@ -6,11 +6,9 @@ import android.app.FragmentManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.v4.widget.DrawerLayout;
-import android.util.Log;
 import android.view.Menu;
-import android.view.MenuItem;
 
-import applico.googlezlpreview.NavigationDrawerFragment;
+import applico.googlezlpreview.fragments.NavigationDrawerFragment;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.fragments.DrawerFragment;
 
@@ -64,7 +62,7 @@ public class BaseDrawerActivity extends Activity implements NavigationDrawerFrag
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
         actionBar.setDisplayShowTitleEnabled(true);
     }
 }

@@ -12,6 +12,7 @@ import android.graphics.drawable.Drawable;
 import android.util.AttributeSet;
 import android.util.Log;
 import android.view.View;
+import android.view.ViewOutlineProvider;
 import android.widget.ImageView;
 
 import applico.googlezlpreview.R;
@@ -41,7 +42,7 @@ public class FabView extends ImageView {
     private int mDrawableWidth;
     private int mOffsetLeft;
     private int mOffsetTop;
-    private Outline mOutline;
+    private ViewOutlineProvider mOutline;
 
     private float mScreenDensityFloat;
     private Drawable mDrawable;
@@ -103,7 +104,7 @@ public class FabView extends ImageView {
                     mDrawableHeight + mOffsetTop);
             mDrawable.draw(canvas);
         }
-        this.setOutline(mOutline);
+        //TODO this.setOutline(mOutline);
         setClipToOutline(true);
     }
 
@@ -219,10 +220,14 @@ public class FabView extends ImageView {
         mOffsetLeft = mCircleRadius - (mDrawableWidth/2);
         mOffsetTop = mCircleRadius - (mDrawableWidth/2);
 
-
+        mOutline =  new ViewOutlineProvider() {
+            @Override
+            public void getOutline(View view, Outline outline) {
+                // Or read size directly from the view's width/height
+                outline.setOval(0,0,(mCircleRadius * 2),(mCircleRadius *2));
+            }
+        };
         //Set the outline for the elevation attribute
-        mOutline = new Outline();
-        mOutline.setOval(0,0,(mCircleRadius * 2),(mCircleRadius *2));
 
         attrsArray.recycle();
         this.bringToFront();

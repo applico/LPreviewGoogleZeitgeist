@@ -8,7 +8,6 @@ import android.app.FragmentManager;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,7 +15,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.support.v4.widget.DrawerLayout;
 
-import applico.googlezlpreview.NavigationDrawerFragment;
+import applico.googlezlpreview.fragments.NavigationDrawerFragment;
 import applico.googlezlpreview.R;
 
 /**
@@ -45,16 +44,18 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
 
-        mNavigationDrawerFragment = (NavigationDrawerFragment)
-                getFragmentManager().findFragmentById(R.id.navigation_drawer);
         mTitle = getTitle();
 
         final CardView mGlobalCardView = (CardView)findViewById(R.id.global_card_view);
         mGlobalCardView.setOnClickListener(this);
+        mNavigationDrawerFragment = (NavigationDrawerFragment)
+                getFragmentManager().findFragmentById(R.id.navigation_drawer);
         // Set up the drawer.
         mNavigationDrawerFragment.setUp(
                 R.id.navigation_drawer,
                 (DrawerLayout) findViewById(R.id.drawer_layout));
+        getActionBar().setDisplayHomeAsUpEnabled(true);
+        getActionBar().setHomeButtonEnabled(true);
     }
 
     @Override
@@ -76,7 +77,8 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
 
     public void restoreActionBar() {
         ActionBar actionBar = getActionBar();
-        actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        //actionBar.setNavigationMode(ActionBar.NAVIGATION_MODE_STANDARD);
+        //Is this mode helpful and required? This is the same in all occurrences
         actionBar.setDisplayShowTitleEnabled(true);
         actionBar.setTitle(mTitle);
     }
@@ -111,11 +113,10 @@ public class HomeActivity extends Activity implements NavigationDrawerFragment.N
         switch(v.getId())
         {
             case R.id.global_card_view:
-            {
                 Intent intent = new Intent(this, GlobalActivity.class);
                 startActivity(intent);
                 break;
-            }
+
         }
 
     }

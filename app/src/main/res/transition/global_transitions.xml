@@ -34,11 +34,11 @@
 
 
 
-    <moveImage>
+    <changeImageTransform>
         <targets>
             <target android:targetId="@id/base_image"/>
             <target android:targetId="@id/global_details_image_details"/>
         </targets>
-    </moveImage>
+    </changeImageTransform>
 
 </transitionSet>

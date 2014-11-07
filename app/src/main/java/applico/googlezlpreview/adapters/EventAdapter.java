@@ -131,7 +131,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         TextView aVTitle = holder.mTitleTV;
         TextView aVRank = holder.mTitleRankTV;
         ImageView aVImage = holder.mBaseImageIV;
-        aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
+        aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
        final CardView cv = (CardView)aVImage.getParent().getParent();
 
 
@@ -143,7 +143,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
         Activity act = (Activity)ctx;
 
-        Pair shared = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
+        Pair shared = Pair.create(aVImage, GlobalDetailsActivity.SHARED_IMAGE);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
         Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
@@ -155,13 +155,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         TextView aVTitle = holder.mTitleTV;
         TextView aVRank = holder.mTitleRankTV;
         ImageView aVImage = holder.mBaseImageIV;
-        aVImage.setViewName(GlobalDetailsActivity.SHARED_IMAGE);
+        aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
 
 
         final CardView cv = (CardView)aVImage.getParent().getParent();
         RelativeLayout rl = (RelativeLayout)cv.getParent().getParent().getParent();
         FabView fv = (FabView)rl.findViewById(R.id.fab_view);
-        fv.setViewName(GlobalDetailsActivity.SHARED_FAB_VIEW);
+        fv.setTransitionName(GlobalDetailsActivity.SHARED_FAB_VIEW);
 
 
         Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);

@@ -6,7 +6,7 @@ import android.os.Bundle;
 import android.support.v4.app.FragmentActivity;
 import android.support.v4.widget.DrawerLayout;
 
-import applico.googlezlpreview.NavigationDrawerFragment;
+import applico.googlezlpreview.fragments.NavigationDrawerFragment;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.fragments.DrawerFragment;
 

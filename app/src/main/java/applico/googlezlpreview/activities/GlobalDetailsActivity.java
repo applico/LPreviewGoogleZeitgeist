@@ -90,9 +90,9 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
         //Setup the shared resources
         mBaseIV = (ImageView) findViewById(R.id.global_details_image_details);
-        mBaseIV.setViewName(SHARED_IMAGE);
+        mBaseIV.setTransitionName(SHARED_IMAGE);
         mFabView = (FabView) findViewById(R.id.fab_view_details);
-        mFabView.setViewName(SHARED_FAB_VIEW);
+        mFabView.setTransitionName(SHARED_FAB_VIEW);
 
         mTitleTV = (TextView) findViewById(R.id.base_caption_details);
         mTitleRankTV = (TextView) findViewById(R.id.base_caption_num_details);
@@ -185,26 +185,34 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
         mBaseIV.setImageDrawable(getResources().getDrawable(bundle.getInt(RESOURCE_KEY)));
         mTitleTV.setText(bundle.getString(TITLE_KEY));
         mTitleRankTV.setText(bundle.getString(RANK_KEY));
+        final BitmapDrawable d = (BitmapDrawable) mBaseIV.getDrawable();
 
-        //Set the tint
-        final Drawable d = mBaseIV.getDrawable();
-        Bitmap b =  ((BitmapDrawable)d).getBitmap();
-        Palette p = Palette.generate(b);
+        //Set the tint and animate
+        Palette.generateAsync(d.getBitmap(), new Palette.PaletteAsyncListener() {
+            public void onGenerated(Palette p) {
+                // Do something with colors...
+                //Get the light vibrant color in the image and tint it dark
+                final int color;
+                if(p.getVibrantSwatch() != null) {
+                    color = p.getVibrantSwatch().getRgb();
+                } else {
+                    color = p.getLightVibrantColor(getResources().getColor(R.color.cardview_light_background));
+                }
 
-        //Get the light vibrant color in the image and tint it dark
-        final int color = p.getLightVibrantColor(getResources().getColor(R.color.appBarColor));
-
-        ValueAnimator anim = ValueAnimator.ofInt(TINT_START,TINT_END);
-        anim.setDuration(TINT_ANIM_TIME);
-        anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
-            @Override
-            public void onAnimationUpdate(ValueAnimator valueAnimator) {
-                int percent = (Integer)valueAnimator.getAnimatedValue();
-                int val = getShadedColor(color, percent);
-                d.setTint(ColorStateList.valueOf(val), PorterDuff.Mode.DARKEN);
+                ValueAnimator anim = ValueAnimator.ofInt(TINT_START,TINT_END);
+                anim.setDuration(TINT_ANIM_TIME);
+                anim.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
+                    @Override
+                    public void onAnimationUpdate(ValueAnimator valueAnimator) {
+                        int percent = (Integer)valueAnimator.getAnimatedValue();
+                        int val = getShadedColor(color, percent);
+                        d.setTint(val);
+                        d.setTintMode(PorterDuff.Mode.DARKEN);
+                    }
+                });
+                anim.start();
             }
         });
-        anim.start();
 
 
         //Fade in animation for the text
