@@ -69,7 +69,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
 
 
     private static final int TEXT_SIZE = 40;
-    private static final int TINT_START = 150;
+    private static final int TINT_START = -100;
     private static final int TINT_END = -50;
     private static final int TINT_ANIM_TIME = 2000;
 
@@ -192,12 +192,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
             public void onGenerated(Palette p) {
                 // Do something with colors...
                 //Get the light vibrant color in the image and tint it dark
-                final int color;
-                if(p.getVibrantSwatch() != null) {
-                    color = p.getVibrantSwatch().getRgb();
-                } else {
-                    color = p.getLightVibrantColor(getResources().getColor(R.color.cardview_light_background));
-                }
+                final int color = p.getLightVibrantColor(getResources().getColor(R.color.cardview_light_background));
 
                 ValueAnimator anim = ValueAnimator.ofInt(TINT_START,TINT_END);
                 anim.setDuration(TINT_ANIM_TIME);
@@ -207,7 +202,7 @@ public class GlobalDetailsActivity extends FragmentActivity implements GlobalDet
                         int percent = (Integer)valueAnimator.getAnimatedValue();
                         int val = getShadedColor(color, percent);
                         d.setTint(val);
-                        d.setTintMode(PorterDuff.Mode.DARKEN);
+                        d.setTintMode(PorterDuff.Mode.LIGHTEN);
                     }
                 });
                 anim.start();
