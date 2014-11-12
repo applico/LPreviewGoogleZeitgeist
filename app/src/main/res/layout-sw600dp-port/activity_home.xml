@@ -17,8 +17,8 @@
         >
 
         <RelativeLayout
-            android:layout_width="fill_parent"
-            android:layout_height="fill_parent"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
             android:layout_margin="10dp" >
 
         <!-- Top Cardview -->
@@ -34,11 +34,11 @@
             card_view:cardCornerRadius="4dp" >
 
             <RelativeLayout
-                   android:layout_width="fill_parent"
+                   android:layout_width="match_parent"
                    android:layout_height="wrap_content">
 
                 <ImageView android:id="@+id/z_placeholder_image"
-                           android:layout_width="fill_parent"
+                           android:layout_width="match_parent"
                            android:layout_height="wrap_content"
                            android:scaleType="fitXY"
                            android:src="@drawable/img_video"
@@ -63,7 +63,7 @@
             <!-- Middle Container for the CardView -->
             <RelativeLayout
                 android:id="@+id/card_container"
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:layout_below="@+id/yir_card_view"  >
@@ -151,7 +151,7 @@
             </RelativeLayout>
 
             <RelativeLayout
-                android:layout_width="fill_parent"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:background="@color/gameAccentColor"
                 android:layout_alignParentBottom="true"
