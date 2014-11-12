@@ -144,6 +144,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         Activity act = (Activity)ctx;
 
         Pair shared = Pair.create(aVImage, GlobalDetailsActivity.SHARED_IMAGE);
+        //TODO add another pair for the FAB view
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
         Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
