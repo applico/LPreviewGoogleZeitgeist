@@ -46,10 +46,17 @@ Including:
 
 * Drawable Tinting and the Palette Class
 
+###Future work
 
 Some of the more advanced topics like curved motion and the reveal and path based implementations didn't make it into this demo.  But we encourage people to contribute and help us out!
 
+* Reveal animations
 
+* Path based animations
+
+* Use new interpolators
+
+* Multiple shared elements in activity transistions
 
 ###License
 
