@@ -92,13 +92,13 @@ public class GlobalFragment extends Fragment implements View.OnClickListener {
         mRecView.setHasFixedSize(true);
         mRecView.setLayoutManager(new LinearLayoutManager(getActivity()));
 
-        // specify an adapter (see also next example)
-        mAdapter = new EventAdapter(mEvents);
-        mRecView.setAdapter(mAdapter);
-
         mFabView = (FabView)mRootView.findViewById(R.id.fab_view);
         mFabView.setOnClickListener(this);
         mDrawable = (AnimatedStateListDrawable)mFabView.getCDrawable();
+
+        // specify an adapter (see also next example)
+        mAdapter = new EventAdapter(mEvents, mFabView);
+        mRecView.setAdapter(mAdapter);
 
         return mRootView;
     }

@@ -41,11 +41,13 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     private static String LOG_TAG = EventAdapter.class.getSimpleName();
     private List<Event> mEventDataset;
     private static final int SLIDE_DURATION = 300;
+    private View mFabView;
 
     // Provide a suitable constructor (depends on the kind of dataset)
-    public EventAdapter(List<Event> myDataset)
+    public EventAdapter(List<Event> myDataset, View fabView)
     {
         mEventDataset = myDataset;
+        mFabView = fabView;
     }
 
 
@@ -143,8 +145,11 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
         Activity act = (Activity)ctx;
 
+        mFabView.setTransitionName(GlobalDetailsActivity.SHARED_FAB_VIEW);
+
         Pair shared = Pair.create(aVImage, GlobalDetailsActivity.SHARED_IMAGE);
         //TODO add another pair for the FAB view
+        Pair sharedFab = Pair.create(mFabView, GlobalDetailsActivity.SHARED_FAB_VIEW);
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
         Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
@@ -184,6 +189,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
         final int originalLeftMargin = params.leftMargin;
         final int originalRightMargin = params.rightMargin;
+        //TODO need to figure out how to unwind this animation, as the callback in the onBackPressed does not cover this due to it not being a part of the activity transition.
         Animation anim = new Animation()
         {
             @Override
