@@ -7,7 +7,6 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.widget.CardView;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.util.Pair;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -16,7 +15,6 @@ import android.view.animation.Animation;
 import android.view.animation.Transformation;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
-import android.widget.RelativeLayout;
 import android.widget.TextView;
 
 import java.util.List;
@@ -24,7 +22,6 @@ import java.util.List;
 import applico.googlezlpreview.R;
 import applico.googlezlpreview.activities.GlobalDetailsActivity;
 import applico.googlezlpreview.models.Event;
-import applico.googlezlpreview.views.FabView;
 
 /**
  * There are two methods that I have incorporated as a logical
@@ -96,7 +93,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         switch(v.getId())
         {
             case R.id.learn_more:
-                slideandSharedAnimation(holder, v.getContext());
+                slideAndSharedAnimation(holder, v.getContext());
                 break;
             case R.id.region_card_view:
                 standardSharedAnimation(holder, v.getContext());
@@ -132,7 +129,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     //TODO this logic needs to be moved out of the adapter and into the fragment.
     private void standardSharedAnimation(ViewHolder holder, Context ctx)
     {
-        Event event = mEventDataset.get(Integer.parseInt(holder.mTitleRankTV.getText().toString()) - 1);
+        final Event event = mEventDataset.get(Integer.parseInt(holder.mTitleRankTV.getText().toString()) - 1);
 
         final Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
@@ -148,52 +145,38 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     }
 
     //TODO this logic needs to be moved out of the adapter and into the fragment.
-    private void slideandSharedAnimation(ViewHolder holder, final Context ctx)
+    private void slideAndSharedAnimation(ViewHolder holder, final Context ctx)
     {
-        TextView aVRank = holder.mTitleRankTV;
-        ImageView aVImage = holder.mBaseImageIV;
-        aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
 
+        final CardView cv = (CardView)holder.mBaseImageIV.getParent().getParent();
 
-        final CardView cv = (CardView)aVImage.getParent().getParent();
-        RelativeLayout rl = (RelativeLayout)cv.getParent().getParent().getParent();
-        FabView fv = (FabView)rl.findViewById(R.id.fab_view);
-        fv.setTransitionName(GlobalDetailsActivity.SHARED_FAB_VIEW);
-
-
-        Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
+        final Event event = mEventDataset.get(Integer.parseInt(holder.mTitleRankTV.getText().toString()) - 1);
 
         final Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
-        intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
+        intent.putExtra(GlobalDetailsActivity.RANK_KEY, holder.mTitleRankTV.getText());
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
 
-        final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
-        final Pair sharedSecond = Pair.create(fv, GlobalDetailsActivity.SHARED_FAB_VIEW);
+        final Pair sharedFirst = Pair.create(holder.mBaseImageIV,GlobalDetailsActivity.SHARED_IMAGE);
+        final Pair sharedSecond = Pair.create(mFabView, GlobalDetailsActivity.SHARED_FAB_VIEW);
 
         ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx,sharedFirst,sharedSecond);
 
-
         final Bundle bundle = options.toBundle();
-        final int newMargin = 0;
-        LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
-        final int originalLeftMargin = params.leftMargin;
-        final int originalRightMargin = params.rightMargin;
         //TODO need to figure out how to unwind this animation, as the callback in the onBackPressed does not cover this due to it not being a part of the activity transition.
         Animation anim = new Animation()
         {
             @Override
             protected void applyTransformation(float interpolatedTime, Transformation t) {
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
-                int currentLeftMargin = params.leftMargin;
-                int currentRightMargin = params.rightMargin;
+                final LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
+                final int currentLeftMargin = params.leftMargin;
+                final int currentRightMargin = params.rightMargin;
 
-                params.leftMargin = currentLeftMargin - (int)((currentLeftMargin - newMargin) *
+                params.leftMargin = currentLeftMargin - (int)(currentLeftMargin *
                         interpolatedTime);
-                params.rightMargin = currentRightMargin - (int)((currentRightMargin - newMargin) *
+                params.rightMargin = currentRightMargin - (int)(currentRightMargin *
                         interpolatedTime);
                 cv.setLayoutParams(params);
-
             }
 
         };
@@ -207,7 +190,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
 
             @Override
             public void onAnimationEnd(Animation animation) {
-                LinearLayout.LayoutParams params = (LinearLayout.LayoutParams)cv.getLayoutParams();
                 ctx.startActivity(intent, bundle);
             }
 
