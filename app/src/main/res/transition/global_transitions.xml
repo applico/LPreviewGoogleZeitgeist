@@ -25,7 +25,8 @@
     </changeBounds>-->
 
     <changeBounds
-        android:duration="300">
+        android:duration="600"
+        android:interpolator="@android:interpolator/fast_out_slow_in">
         <targets>
             <target android:targetId="@id/fab_view"/>
             <target android:targetId="@+id/fab_view_details"/>
@@ -37,7 +38,8 @@
 
 
     <changeImageTransform
-        android:duration="300">
+        android:duration="600"
+        android:interpolator="@android:interpolator/fast_out_slow_in">
         <targets>
             <target android:targetId="@id/fab_view"/>
             <target android:targetId="@id/base_image"/>
