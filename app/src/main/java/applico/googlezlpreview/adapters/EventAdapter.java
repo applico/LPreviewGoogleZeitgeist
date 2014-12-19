@@ -48,6 +48,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     {
         mEventDataset = myDataset;
         mFabView = fabView;
+        mFabView.setTransitionName(GlobalDetailsActivity.SHARED_FAB_VIEW);
     }
 
 
@@ -57,6 +58,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         View v = LayoutInflater.from(parent.getContext()).inflate(R.layout.fragment_global_items, parent, false);
         // set the view's size, margins, paddings and layout parameters
         ViewHolder vh = new ViewHolder(v);
+        vh.mBaseImageIV.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
         return vh;
     }
 
@@ -130,35 +132,24 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
     //TODO this logic needs to be moved out of the adapter and into the fragment.
     private void standardSharedAnimation(ViewHolder holder, Context ctx)
     {
-        TextView aVTitle = holder.mTitleTV;
-        TextView aVRank = holder.mTitleRankTV;
-        ImageView aVImage = holder.mBaseImageIV;
-        aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
-        final CardView cv = (CardView)aVImage.getParent().getParent();
-
-
-        Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
+        Event event = mEventDataset.get(Integer.parseInt(holder.mTitleRankTV.getText().toString()) - 1);
 
         final Intent intent = new Intent(ctx, GlobalDetailsActivity.class);
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
-        intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
+        intent.putExtra(GlobalDetailsActivity.RANK_KEY, holder.mTitleRankTV.getText());
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
-        Activity act = (Activity)ctx;
 
-        mFabView.setTransitionName(GlobalDetailsActivity.SHARED_FAB_VIEW);
-
-        Pair shared = Pair.create(aVImage, GlobalDetailsActivity.SHARED_IMAGE);
-        //TODO add another pair for the FAB view
-        Pair sharedFab = Pair.create(mFabView, GlobalDetailsActivity.SHARED_FAB_VIEW);
-        ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
-        Bundle bundle = options.toBundle();
+        final Pair shared = Pair.create(holder.mBaseImageIV, GlobalDetailsActivity.SHARED_IMAGE);
+        //TODO: add another pair for the FAB view, below variable should be used but is not at this time.
+        //Pair sharedFab = Pair.create(mFabView, GlobalDetailsActivity.SHARED_FAB_VIEW);
+        final ActivityOptions options = ActivityOptions.makeSceneTransitionAnimation((Activity)ctx, shared);
+        final Bundle bundle = options.toBundle();
         ctx.startActivity(intent, bundle);
     }
 
     //TODO this logic needs to be moved out of the adapter and into the fragment.
     private void slideandSharedAnimation(ViewHolder holder, final Context ctx)
     {
-        TextView aVTitle = holder.mTitleTV;
         TextView aVRank = holder.mTitleRankTV;
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
@@ -176,7 +167,6 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         intent.putExtra(GlobalDetailsActivity.TITLE_KEY, event.eventTitle);
         intent.putExtra(GlobalDetailsActivity.RANK_KEY, aVRank.getText());
         intent.putExtra(GlobalDetailsActivity.RESOURCE_KEY, event.eventImageDetailID);
-        Activity act = (Activity)ctx;
 
         final Pair sharedFirst = Pair.create(aVImage,GlobalDetailsActivity.SHARED_IMAGE);
         final Pair sharedSecond = Pair.create(fv, GlobalDetailsActivity.SHARED_FAB_VIEW);
