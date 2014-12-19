@@ -134,7 +134,7 @@ public class EventAdapter extends RecyclerView.Adapter<EventAdapter.ViewHolder> 
         TextView aVRank = holder.mTitleRankTV;
         ImageView aVImage = holder.mBaseImageIV;
         aVImage.setTransitionName(GlobalDetailsActivity.SHARED_IMAGE);
-       final CardView cv = (CardView)aVImage.getParent().getParent();
+        final CardView cv = (CardView)aVImage.getParent().getParent();
 
 
         Event event = mEventDataset.get(Integer.parseInt(aVRank.getText().toString()) - 1);
